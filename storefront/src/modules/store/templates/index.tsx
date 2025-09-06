@@ -32,7 +32,7 @@ const StoreTemplate = ({
           <PaginatedProducts
             sortBy={sort}
             page={pageNumber}
-            countryCode={countryCode}
+            countryCode={'nl'}
           />
         </Suspense>
       </div>

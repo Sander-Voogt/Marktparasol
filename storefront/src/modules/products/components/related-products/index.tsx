@@ -20,7 +20,7 @@ export default async function RelatedProducts({
   product,
   countryCode,
 }: RelatedProductsProps) {
-  const region = await getRegion(countryCode)
+  const region = await getRegion('nl')
 
   if (!region) {
   const queryParams: StoreProductParamsWithTags = {}

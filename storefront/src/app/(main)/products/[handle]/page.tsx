@@ -83,7 +83,7 @@ export default async function ProductPage({ params }: Props) {
     <ProductTemplate
       product={pricedProduct}
       region={region}
-      countryCode={params.countryCode}
+      countryCode={'nl'}
     />
   )
 }

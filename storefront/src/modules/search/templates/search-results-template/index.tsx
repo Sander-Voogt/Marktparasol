@@ -48,7 +48,7 @@ const SearchResultsTemplate = ({
                 productsIds={ids}
                 sortBy={sortBy}
                 page={pageNumber}
-                countryCode={countryCode}
+                countryCode={'nl'}
               />
             </div>
           </>

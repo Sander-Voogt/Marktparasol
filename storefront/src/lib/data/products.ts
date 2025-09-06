@@ -118,7 +118,7 @@ export const getProductsListWithSort = cache(async function ({
       ...queryParams,
       limit: 100,
     },
-    countryCode,
+    countryCode: 'nl',
   })
 
   const sortedProducts = sortProducts(products, sortBy)

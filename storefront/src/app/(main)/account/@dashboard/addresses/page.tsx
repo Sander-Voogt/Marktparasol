@@ -19,7 +19,7 @@ export default async function Addresses({
 }) {
   const { countryCode } = params
   const customer = await getCustomer()
-  const region = await getRegion(countryCode)
+  const region = await getRegion('nl')
 
   if (!customer || !region) {
     notFound()

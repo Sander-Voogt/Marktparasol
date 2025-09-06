@@ -40,7 +40,7 @@ export const getCollectionsWithProducts = cache(
 
     const { response } = await getProductsList({
       queryParams: { collection_id: collectionIds },
-      countryCode,
+      countryCode: 'nl',
     })
 
     response.products.forEach((product) => {
