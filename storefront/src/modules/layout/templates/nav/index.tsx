@@ -48,6 +48,13 @@ export default async function Nav() {
               >
                 Account
               </LocalizedClientLink>
+               <LocalizedClientLink
+                className="hover:text-ui-fg-base"
+                href="/offerte-aanvragen"
+                data-testid="nav-account-link"
+              >
+                Offerte aanvragen
+              </LocalizedClientLink>
             </div>
             <Suspense
               fallback={
