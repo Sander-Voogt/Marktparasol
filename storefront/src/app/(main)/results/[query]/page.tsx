@@ -36,7 +36,7 @@ export default async function SearchResults({ params, searchParams }: Params) {
       ids={ids}
       sortBy={sortBy}
       page={page}
-      countryCode={params.countryCode}
+      countryCode={'nl'}
     />
   )
 }

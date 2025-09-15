@@ -82,7 +82,7 @@ export default async function CollectionPage({ params, searchParams }: Props) {
       collection={collection}
       page={page}
       sortBy={sortBy}
-      countryCode={params.countryCode}
+      countryCode={'nl'}
     />
   )
 }

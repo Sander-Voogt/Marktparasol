@@ -97,19 +97,19 @@ export async function middleware(request: NextRequest) {
 
   const regionMap = await getRegionMap()
 
-  const countryCode = regionMap && (await getCountryCode(request, regionMap))
+  const countryCode = 'nl'; //regionMap && (await getCountryCode(request, regionMap))
 
   const urlHasCountryCode =
     countryCode && request.nextUrl.pathname.split("/")[1].includes(countryCode)
 
   // check if one of the country codes is in the url
-  if (
-    urlHasCountryCode &&
-    (!isOnboarding || onboardingCookie) &&
-    (!cartId || cartIdCookie)
-  ) {
+  // if (
+  //   urlHasCountryCode &&
+  //   (!isOnboarding || onboardingCookie) &&
+  //   (!cartId || cartIdCookie)
+  // ) {
     return NextResponse.next()
-  }
+  // }
 
   const redirectPath =
     request.nextUrl.pathname === "/" ? "" : request.nextUrl.pathname
