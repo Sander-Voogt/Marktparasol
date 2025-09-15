@@ -48,7 +48,31 @@ const nextConfig = {
   },
   serverRuntimeConfig: {
     port: process.env.PORT || 3000
-  }
+  },
+  async redirects() {
+    return [
+{
+        source: '/parasol/2.5x3-meter-parasol',
+        destination: '/products/marktparasol-2.5x3-meter-metaal',
+        permanent: true,
+      },
+      {
+        source: '/parasol/2x3-meter-parasol',
+        destination: '/products/marktparasol-2x3-meter-metaal',
+        permanent: true,
+      },
+       {
+        source: '/parasol/3x4-meter-parasol',
+        destination: '/products/marktparasol-3x4-meter-metaal',
+        permanent: true,
+      },
+       {
+        source: '/parasol/:path*',
+        destination: '/collections/markt-parasols',
+        permanent: true,
+      },
+
+    ]}
 }
 
 module.exports = nextConfig
