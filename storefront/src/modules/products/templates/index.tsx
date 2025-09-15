@@ -10,6 +10,7 @@ import SkeletonRelatedProducts from "@modules/skeletons/templates/skeleton-relat
 import { notFound } from "next/navigation"
 import ProductActionsWrapper from "./product-actions-wrapper"
 import { HttpTypes } from "@medusajs/types"
+import { ProductDescription } from "@modules/common/components/rendertiptap"
 
 type ProductTemplateProps = {
   product: HttpTypes.StoreProduct
@@ -54,12 +55,14 @@ const ProductTemplate: React.FC<ProductTemplateProps> = ({
           </Suspense>
         </div>
       </div>
+      <ProductDescription content={product?.metadata?.maindescription} />
+
       <div
         className="content-container my-16 small:my-32"
         data-testid="related-products-container"
       >
         <Suspense fallback={<SkeletonRelatedProducts />}>
-          <RelatedProducts product={product} countryCode={'nl'} />
+          <RelatedProducts product={product} countryCode={"nl"} />
         </Suspense>
       </div>
     </>

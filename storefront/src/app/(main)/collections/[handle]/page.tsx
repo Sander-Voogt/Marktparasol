@@ -4,6 +4,7 @@ import { notFound } from "next/navigation"
 import {
   getCollectionByHandle,
   getCollectionsList,
+  getCollectionByHandleMeta
 } from "@lib/data/collections"
 import { listRegions } from "@lib/data/regions"
 import { StoreCollection, StoreRegion } from "@medusajs/types"
@@ -69,9 +70,11 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
 export default async function CollectionPage({ params, searchParams }: Props) {
   const { sortBy, page } = searchParams
 
-  const collection = await getCollectionByHandle(params.handle).then(
+  const collection = await getCollectionByHandleMeta(params.handle).then(
     (collection: StoreCollection) => collection
   )
+
+  console.log(collection)
 
   if (!collection) {
     notFound()

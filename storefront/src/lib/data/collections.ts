@@ -2,6 +2,7 @@ import { sdk } from "@lib/config"
 import { cache } from "react"
 import { getProductsList } from "./products"
 import { HttpTypes } from "@medusajs/types"
+import { metadata } from "app/layout"
 
 export const retrieveCollection = cache(async function (id: string) {
   return sdk.store.collection
@@ -24,6 +25,20 @@ export const getCollectionByHandle = cache(async function (
   return sdk.store.collection
     .list({ handle }, { next: { tags: ["collections"] } })
     .then(({ collections }) => collections[0])
+})
+
+export const getCollectionByHandleMeta = cache(async function (
+  handle: string
+): Promise<HttpTypes.StoreCollection> {
+  const { collections } = await sdk.store.collection.list(
+    { handle },
+    { next: { tags: ["collections"] } }
+  )
+  if (!collections.length) {
+    throw new Error("Collection not found")
+  }
+  const { collection } = await sdk.store.collection.retrieve(collections[0].id, {fields: "title, handle, metadata"})
+  return collection
 })
 
 export const getCollectionsWithProducts = cache(
