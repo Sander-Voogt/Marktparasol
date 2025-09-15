@@ -110,34 +110,34 @@ export async function middleware(request: NextRequest) {
     return NextResponse.next()
   // }
 
-  const redirectPath =
-    request.nextUrl.pathname === "/" ? "" : request.nextUrl.pathname
+  // const redirectPath =
+  //   request.nextUrl.pathname === "/" ? "" : request.nextUrl.pathname
 
-  const queryString = request.nextUrl.search ? request.nextUrl.search : ""
+  // const queryString = request.nextUrl.search ? request.nextUrl.search : ""
 
-  let redirectUrl = request.nextUrl.href
+  // let redirectUrl = request.nextUrl.href
 
-  let response = NextResponse.redirect(redirectUrl, 307)
+  // let response = NextResponse.redirect(redirectUrl, 307)
 
-  // If no country code is set, we redirect to the relevant region.
-  if (!urlHasCountryCode && countryCode) {
-    redirectUrl = `${request.nextUrl.origin}/${countryCode}${redirectPath}${queryString}`
-    response = NextResponse.redirect(`${redirectUrl}`, 307)
-  }
+  // // If no country code is set, we redirect to the relevant region.
+  // if (!urlHasCountryCode && countryCode) {
+  //   redirectUrl = `${request.nextUrl.origin}/${countryCode}${redirectPath}${queryString}`
+  //   response = NextResponse.redirect(`${redirectUrl}`, 307)
+  // }
 
-  // If a cart_id is in the params, we set it as a cookie and redirect to the address step.
-  if (cartId && !checkoutStep) {
-    redirectUrl = `${redirectUrl}&step=address`
-    response = NextResponse.redirect(`${redirectUrl}`, 307)
-    response.cookies.set("_medusa_cart_id", cartId, { maxAge: 60 * 60 * 24 })
-  }
+  // // If a cart_id is in the params, we set it as a cookie and redirect to the address step.
+  // if (cartId && !checkoutStep) {
+  //   redirectUrl = `${redirectUrl}&step=address`
+  //   response = NextResponse.redirect(`${redirectUrl}`, 307)
+  //   response.cookies.set("_medusa_cart_id", cartId, { maxAge: 60 * 60 * 24 })
+  // }
 
-  // Set a cookie to indicate that we're onboarding. This is used to show the onboarding flow.
-  if (isOnboarding) {
-    response.cookies.set("_medusa_onboarding", "true", { maxAge: 60 * 60 * 24 })
-  }
+  // // Set a cookie to indicate that we're onboarding. This is used to show the onboarding flow.
+  // if (isOnboarding) {
+  //   response.cookies.set("_medusa_onboarding", "true", { maxAge: 60 * 60 * 24 })
+  // }
 
-  return response
+  // return response
 }
 
 export const config = {
