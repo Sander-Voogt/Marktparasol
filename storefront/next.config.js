@@ -32,6 +32,10 @@ const nextConfig = {
         protocol: "https",
         hostname: "medusa-public-images.s3.eu-west-1.amazonaws.com",
       },
+            { // Note: can be removed after deleting demo products
+        protocol: "https",
+        hostname: "form.evservice.eu",
+      },
       { // Note: can be removed after deleting demo products
         protocol: "https",
         hostname: "medusa-server-testing.s3.amazonaws.com",
