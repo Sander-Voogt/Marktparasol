@@ -27,6 +27,8 @@ const ProductTemplate: React.FC<ProductTemplateProps> = ({
     return notFound()
   }
 
+  console.log(product.metadata)
+
   return (
     <>
       <div
