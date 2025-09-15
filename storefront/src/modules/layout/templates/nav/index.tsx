@@ -38,7 +38,7 @@ export default async function Nav() {
                   scroll={false}
                   data-testid="nav-search-link"
                 >
-                  Search
+                  Zoeken
                 </LocalizedClientLink>
               )}
               <LocalizedClientLink
@@ -56,7 +56,7 @@ export default async function Nav() {
                   href="/cart"
                   data-testid="nav-cart-link"
                 >
-                  Cart (0)
+                  Winkelwagen (0)
                 </LocalizedClientLink>
               }
             >

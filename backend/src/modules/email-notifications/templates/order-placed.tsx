@@ -26,11 +26,11 @@ export const OrderPlacedTemplate: React.FC<OrderPlacedTemplateProps> & {
     <Base preview={preview}>
       <Section>
         <Text style={{ fontSize: '24px', fontWeight: 'bold', textAlign: 'center', margin: '0 0 30px' }}>
-          Order Confirmation
+          Bestel bevestiging
         </Text>
 
         <Text style={{ margin: '0 0 15px' }}>
-          Dear {shippingAddress.first_name} {shippingAddress.last_name},
+          Beste {shippingAddress.first_name} {shippingAddress.last_name},
         </Text>
 
         <Text style={{ margin: '0 0 30px' }}>
@@ -53,7 +53,7 @@ export const OrderPlacedTemplate: React.FC<OrderPlacedTemplateProps> & {
         <Hr style={{ margin: '20px 0' }} />
 
         <Text style={{ fontSize: '18px', fontWeight: 'bold', margin: '0 0 10px' }}>
-          Shipping Address
+          Verzendadres
         </Text>
         <Text style={{ margin: '0 0 5px' }}>
           {shippingAddress.address_1}
