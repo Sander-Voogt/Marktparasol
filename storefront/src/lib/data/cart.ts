@@ -27,10 +27,10 @@ export async function retrieveCart() {
 
 export async function getOrSetCart(countryCode: string) {
   let cart = await retrieveCart()
-  const region = await getRegion(countryCode)
+  const region = await getRegion('nl')
 
   if (!region) {
-    throw new Error(`Region not found for country code: ${countryCode}`)
+    throw new Error(`Region not found for country code: ${'nl'}`)
   }
 
   if (!cart) {
