@@ -7,7 +7,7 @@ const Hero = () => {
         <div className="flex flex-col md:flex-row">
           <div className="basis-1/2 m-8">
             <h3 className="text-5xl mb-8 mt-8">
-              Sterke Marktparasollen Nodig?
+              Sterke Marktparasols Nodig?
             </h3>
             <p className="text-xl leading-7 ">
               Op zoek naar een stevige en duurzame marktparasol?
