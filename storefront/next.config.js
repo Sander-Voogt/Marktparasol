@@ -71,6 +71,12 @@ const nextConfig = {
         permanent: true,
       },
        {
+        source: '/parasol-met-bedrukking',
+        destination: '/offerte-aanvragen',
+        permanent: true,
+      },
+      
+       {
         source: '/parasol/:path*',
         destination: '/collections/markt-parasols',
         permanent: true,
