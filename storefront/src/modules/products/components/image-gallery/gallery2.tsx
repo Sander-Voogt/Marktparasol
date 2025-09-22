@@ -51,7 +51,7 @@ const ImageGallery2 = ({ images }: ImageGalleryProps) => {
         <div className="embla__container">
           {images.map((index, key) => (
             <div className="embla__slide" key={key}>
-              <div className="embla__slide__number"><Image width={600} height={600} alt='' src={index.url}/></div>
+              <div className="embla__slide__number"><Image quality={50} width={600} height={600} alt='' src={index.url}/></div>
             </div>
           ))}
         </div>
