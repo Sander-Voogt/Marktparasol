@@ -36,12 +36,11 @@ const ProductTemplate: React.FC<ProductTemplateProps> = ({
         className="content-container flex flex-col small:flex-row small:items-start py-6 relative"
         data-testid="product-container"
       >
-
         <div className="block w-full relative">
           <ImageGallery2 images={product?.images || []} />
         </div>
         <div className="flex flex-col small:sticky small:top-48 small:py-0 small:max-w-[300px] w-full py-8 gap-y-12">
-                    <ProductInfo product={product} />
+          <ProductInfo product={product} />
           <ProductTabs product={product} />
           <Suspense
             fallback={
@@ -54,10 +53,9 @@ const ProductTemplate: React.FC<ProductTemplateProps> = ({
           >
             <ProductActionsWrapper id={product.id} region={region} />
           </Suspense>
-
+          <ProductDescription content={product?.metadata?.maindescription} />
         </div>
       </div>
-      <ProductDescription content={product?.metadata?.maindescription} />
 
       <div
         className="content-container my-16 small:my-32"

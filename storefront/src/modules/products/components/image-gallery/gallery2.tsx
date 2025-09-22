@@ -7,6 +7,7 @@ import { useDotButton, DotButton } from './EmblaCarouselDotButton'
 import { HttpTypes } from '@medusajs/types'
 import './embla.css'
 import { Thumb } from './Thumb'
+import Image from 'next/image'
 
 type ImageGalleryProps = {
   images: HttpTypes.StoreProductImage[]
@@ -50,7 +51,7 @@ const ImageGallery2 = ({ images }: ImageGalleryProps) => {
         <div className="embla__container">
           {images.map((index, key) => (
             <div className="embla__slide" key={key}>
-              <div className="embla__slide__number"><img src={index.url}/></div>
+              <div className="embla__slide__number"><Image width={600} height={600} alt='' src={index.url}/></div>
             </div>
           ))}
         </div>
