@@ -1,7 +1,7 @@
+"use client"
+import Script from "next/script"
 
 export default function contact() {
-
-
   return (
     <div className="flex flex-row max-w-7xl mx-auto">
       <div className="basis-1/2">
@@ -26,7 +26,21 @@ export default function contact() {
         </ul>
       </div>
       <div className="basis-1/2">
+        <iframe
+          style={{ border: "none", width: "100%" }}
+          id="my-form-9dbnns"
+          src="http://form.evservice.eu/forms/my-form-9dbnns"
+        ></iframe>
+        <Script
+          src="https://form.evservice.eu/widgets/iframe.min.js"
+          strategy="afterInteractive"
+          onLoad={() => {
+            if (typeof window !== "undefined" && window.initEmbed) {
+              window.initEmbed("my-form-9dbnns")
+            }
+          }}
+        />
       </div>
     </div>
-  );
+  )
 }

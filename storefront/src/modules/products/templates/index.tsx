@@ -11,6 +11,7 @@ import { notFound } from "next/navigation"
 import ProductActionsWrapper from "./product-actions-wrapper"
 import { HttpTypes } from "@medusajs/types"
 import { ProductDescription } from "@modules/common/components/rendertiptap"
+import ImageGallery2 from "../components/image-gallery/gallery2"
 
 type ProductTemplateProps = {
   product: HttpTypes.StoreProduct
@@ -35,15 +36,13 @@ const ProductTemplate: React.FC<ProductTemplateProps> = ({
         className="content-container flex flex-col small:flex-row small:items-start py-6 relative"
         data-testid="product-container"
       >
-        <div className="flex flex-col small:sticky small:top-48 small:py-0 small:max-w-[300px] w-full py-8 gap-y-6">
-          <ProductInfo product={product} />
-          <ProductTabs product={product} />
-        </div>
+
         <div className="block w-full relative">
-          <ImageGallery images={product?.images || []} />
+          <ImageGallery2 images={product?.images || []} />
         </div>
         <div className="flex flex-col small:sticky small:top-48 small:py-0 small:max-w-[300px] w-full py-8 gap-y-12">
-          <ProductOnboardingCta />
+                    <ProductInfo product={product} />
+          <ProductTabs product={product} />
           <Suspense
             fallback={
               <ProductActions
@@ -55,6 +54,7 @@ const ProductTemplate: React.FC<ProductTemplateProps> = ({
           >
             <ProductActionsWrapper id={product.id} region={region} />
           </Suspense>
+
         </div>
       </div>
       <ProductDescription content={product?.metadata?.maindescription} />
