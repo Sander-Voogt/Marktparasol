@@ -27,7 +27,7 @@ export default function contact() {
       </div>
       <div className="basis-1/2">
         <iframe
-          style={{ border: "none", width: "100%" }}
+          style={{ border: "none", width: "100%", height:"800px" }}
           id="my-form-9dbnns"
           src="https://form.evservice.eu/forms/my-form-9dbnns"
         ></iframe>
