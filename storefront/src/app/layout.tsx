@@ -1,6 +1,7 @@
 import { getBaseURL } from "@lib/util/env"
 import { Metadata } from "next"
 import "styles/globals.css"
+import { GoogleTagManager } from '@next/third-parties/google'
 
 export const metadata: Metadata = {
   metadataBase: new URL(getBaseURL()),
@@ -8,7 +9,8 @@ export const metadata: Metadata = {
 
 export default function RootLayout(props: { children: React.ReactNode }) {
   return (
-    <html lang="en" data-mode="light">
+    <html lang="nl" data-mode="light">
+      <GoogleTagManager gtmId="GTM-W3XXPBL3" />
       <body>
         <main className="relative">{props.children}</main>
       </body>
