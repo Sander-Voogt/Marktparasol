@@ -13,6 +13,8 @@ import MobileActions from "./mobile-actions"
 import ProductPrice from "../product-price"
 import { addToCart } from "@lib/data/cart"
 import { HttpTypes } from "@medusajs/types"
+import { sendGTMEvent } from "@next/third-parties/google"
+import { getProductPrice } from "@lib/util/get-product-price"
 
 type ProductActionsProps = {
   product: HttpTypes.StoreProduct
@@ -44,6 +46,27 @@ export default function ProductActions({
   const [options, setOptions] = useState<Record<string, string | undefined>>({})
   const [isAdding, setIsAdding] = useState(false)
   const countryCode = useParams().countryCode as string
+
+    const { cheapestPrice, variantPrice } = getProductPrice({
+      product,
+      variantId: product?.variants[0].id,
+    })
+  
+  sendGTMEvent({ ecommerce: null })
+  sendGTMEvent({
+    event: "view_item",
+    ecommerce: {
+      currency: "EUR",
+      value: cheapestPrice?.calculated_price,
+      items: [
+        {
+          item_id: product.id,
+          item_name: product.title,
+          price: cheapestPrice?.calculated_price,
+        },
+      ],
+    },
+  })
 
   // If there is only 1 variant, preselect the options
   useEffect(() => {
