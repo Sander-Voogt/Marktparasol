@@ -13,7 +13,7 @@ import MobileActions from "./mobile-actions"
 import ProductPrice from "../product-price"
 import { addToCart } from "@lib/data/cart"
 import { HttpTypes } from "@medusajs/types"
-import { sendGTMEvent } from "@next/third-parties/google"
+import { GoogleTagManager, sendGTMEvent } from "@next/third-parties/google"
 import { getProductPrice } from "@lib/util/get-product-price"
 
 type ProductActionsProps = {
@@ -144,7 +144,8 @@ export default function ProductActions({
   return (
     <>
       <div className="flex flex-col gap-y-2" ref={actionsRef}>
-        <div>
+      <GoogleTagManager gtmId="GTM-W3XXPBL3" gtmScriptUrl="https://server-side-tracking-production-c7d9.up.railway.app/gtm.js" />
+      <div>
           {(product.variants?.length ?? 0) > 1 && (
             <div className="flex flex-col gap-y-2" ref={actionsRef}>
               {(product.variants?.length ?? 0) > 1 && (
