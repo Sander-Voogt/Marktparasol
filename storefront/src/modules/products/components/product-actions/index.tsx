@@ -52,21 +52,25 @@ export default function ProductActions({
       variantId: product?.variants[0].id,
     })
   
-  sendGTMEvent({ ecommerce: null })
+  useEffect(() => {
+  if (!product || !cheapestPrice) return
+
+  sendGTMEvent({ ecommerce: null }) // reset
   sendGTMEvent({
     event: "view_item",
     ecommerce: {
-      currency: "EUR",
-      value: cheapestPrice?.calculated_price,
+      currency: region.currency_code.toUpperCase(),
+      value: cheapestPrice.calculated_price,
       items: [
         {
           item_id: product.id,
           item_name: product.title,
-          price: cheapestPrice?.calculated_price,
+          price: cheapestPrice.calculated_price,
         },
       ],
     },
   })
+}, [product, cheapestPrice, region])
 
   // If there is only 1 variant, preselect the options
   useEffect(() => {
