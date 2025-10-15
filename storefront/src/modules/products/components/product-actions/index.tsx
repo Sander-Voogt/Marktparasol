@@ -46,35 +46,6 @@ export default function ProductActions({
   const [options, setOptions] = useState<Record<string, string | undefined>>({})
   const [isAdding, setIsAdding] = useState(false)
   const countryCode = useParams().countryCode as string
-  
-  useEffect(() => {
-  if (!product || !product.id) return
-
-  const { cheapestPrice } = getProductPrice({
-    product,
-    variantId: product?.variants?.[0]?.id,
-  })
-
-  console.log(cheapestPrice)
-  if (!cheapestPrice) return
-
-  sendGTMEvent({ ecommerce: null })
-  sendGTMEvent({
-    event: "view_item",
-    ecommerce: {
-      currency: region.currency_code.toUpperCase(),
-      value: cheapestPrice.calculated_price,
-      items: [
-        {
-          item_id: product.id,
-          item_name: product.title,
-          price: cheapestPrice.calculated_price,
-        },
-      ],
-    },
-  })
-}, [product, region])
-
 
   // If there is only 1 variant, preselect the options
   useEffect(() => {
@@ -136,6 +107,30 @@ export default function ProductActions({
     if (!selectedVariant?.id) return null
 
     setIsAdding(true)
+
+    const { cheapestPrice } = getProductPrice({
+      product,
+      variantId: selectedVariant.id,
+    })
+
+    console.log(cheapestPrice)
+    if (cheapestPrice) {
+      sendGTMEvent({ ecommerce: null })
+      sendGTMEvent({
+        event: "view_item",
+        ecommerce: {
+          currency: region.currency_code.toUpperCase(),
+          value: cheapestPrice.calculated_price,
+          items: [
+            {
+              item_id: product.id,
+              item_name: product.title,
+              price: cheapestPrice.calculated_price,
+            },
+          ],
+        },
+      })
+    }
 
     await addToCart({
       variantId: selectedVariant.id,
