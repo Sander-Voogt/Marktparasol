@@ -53,9 +53,16 @@ export default function ProductActions({
     })
   
   useEffect(() => {
-  if (!product || !cheapestPrice) return
+  if (!product || !product.id) return
 
-  sendGTMEvent({ ecommerce: null }) // reset
+  const { cheapestPrice } = getProductPrice({
+    product,
+    variantId: product?.variants?.[0]?.id,
+  })
+
+  if (!cheapestPrice) return
+
+  sendGTMEvent({ ecommerce: null })
   sendGTMEvent({
     event: "view_item",
     ecommerce: {
@@ -70,7 +77,8 @@ export default function ProductActions({
       ],
     },
   })
-}, [product, cheapestPrice, region])
+}, [product, region])
+
 
   // If there is only 1 variant, preselect the options
   useEffect(() => {
