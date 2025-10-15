@@ -46,11 +46,6 @@ export default function ProductActions({
   const [options, setOptions] = useState<Record<string, string | undefined>>({})
   const [isAdding, setIsAdding] = useState(false)
   const countryCode = useParams().countryCode as string
-
-    const { cheapestPrice, variantPrice } = getProductPrice({
-      product,
-      variantId: product?.variants[0].id,
-    })
   
   useEffect(() => {
   if (!product || !product.id) return
@@ -60,6 +55,7 @@ export default function ProductActions({
     variantId: product?.variants?.[0]?.id,
   })
 
+  console.log(cheapestPrice)
   if (!cheapestPrice) return
 
   sendGTMEvent({ ecommerce: null })
