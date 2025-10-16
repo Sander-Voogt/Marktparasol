@@ -55,6 +55,33 @@ export default function ProductActions({
     }
   }, [product.variants])
 
+  useEffect(() => {
+    if (!product || !product.id) return
+
+    const { cheapestPrice } = getProductPrice({
+      product,
+      variantId: product?.variants?.[0]?.id,
+    })
+
+    if (!cheapestPrice) return
+
+    sendGTMEvent({ ecommerce: null })
+    sendGTMEvent({
+      event: "view_item",
+      ecommerce: {
+        currency: region.currency_code.toUpperCase(),
+        value: cheapestPrice.calculated_price,
+        items: [
+          {
+            item_id: product.id,
+            item_name: product.title,
+            price: cheapestPrice.calculated_price,
+          },
+        ],
+      },
+    })
+  }, [product, region])
+
   const selectedVariant = useMemo(() => {
     if (!product.variants || product.variants.length === 0) {
       return
@@ -115,9 +142,8 @@ export default function ProductActions({
 
     console.log(cheapestPrice)
     if (cheapestPrice) {
-      sendGTMEvent({ ecommerce: null })
       sendGTMEvent({
-        event: "view_item",
+        event: "add_to_cart",
         ecommerce: {
           currency: region.currency_code.toUpperCase(),
           value: cheapestPrice.calculated_price,
@@ -144,8 +170,11 @@ export default function ProductActions({
   return (
     <>
       <div className="flex flex-col gap-y-2" ref={actionsRef}>
-      <GoogleTagManager gtmId="GTM-W3XXPBL3" gtmScriptUrl="https://server-side-tracking-production-c7d9.up.railway.app/gtm.js" />
-      <div>
+        <GoogleTagManager
+          gtmId="GTM-W3XXPBL3"
+          gtmScriptUrl="https://server-side-tracking-production-c7d9.up.railway.app/gtm.js"
+        />
+        <div>
           {(product.variants?.length ?? 0) > 1 && (
             <div className="flex flex-col gap-y-2" ref={actionsRef}>
               {(product.variants?.length ?? 0) > 1 && (
