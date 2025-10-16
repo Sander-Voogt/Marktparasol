@@ -1,12 +1,42 @@
+"use client"
+import { getProductPrice } from "@lib/util/get-product-price"
 import { HttpTypes } from "@medusajs/types"
 import { Heading, Text } from "@medusajs/ui"
 import LocalizedClientLink from "@modules/common/components/localized-client-link"
+import { sendGTMEvent } from "@next/third-parties/google"
+import { useEffect } from "react"
 
 type ProductInfoProps = {
   product: HttpTypes.StoreProduct
 }
 
 const ProductInfo = ({ product }: ProductInfoProps) => {
+  useEffect(() => {
+    if (!product || !product.id) return
+
+    const { cheapestPrice } = getProductPrice({
+      product,
+      variantId: product?.variants?.[0]?.id,
+    })
+
+    if (!cheapestPrice) return
+
+    sendGTMEvent({ ecommerce: null })
+    sendGTMEvent({
+      event: "view_item",
+      ecommerce: {
+        currency: "EUR",
+        value: cheapestPrice.calculated_price,
+        items: [
+          {
+            item_id: product.id,
+            item_name: product.title,
+            price: cheapestPrice.calculated_price,
+          },
+        ],
+      },
+    })
+  }, [])
   return (
     <div id="product-info">
       <div className="flex flex-col gap-y-4 lg:max-w-[500px] mx-auto">

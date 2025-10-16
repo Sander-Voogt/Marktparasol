@@ -55,32 +55,6 @@ export default function ProductActions({
     }
   }, [product.variants])
 
-  useEffect(() => {
-    if (!product || !product.id) return
-
-    const { cheapestPrice } = getProductPrice({
-      product,
-      variantId: product?.variants?.[0]?.id,
-    })
-
-    if (!cheapestPrice) return
-
-    sendGTMEvent({ ecommerce: null })
-    sendGTMEvent({
-      event: "view_item",
-      ecommerce: {
-        currency: region.currency_code.toUpperCase(),
-        value: cheapestPrice.calculated_price,
-        items: [
-          {
-            item_id: product.id,
-            item_name: product.title,
-            price: cheapestPrice.calculated_price,
-          },
-        ],
-      },
-    })
-  }, [product, region])
 
   const selectedVariant = useMemo(() => {
     if (!product.variants || product.variants.length === 0) {
