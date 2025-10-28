@@ -6,9 +6,9 @@ import { getCollectionsWithProducts } from "@lib/data/collections"
 import { getRegion } from "@lib/data/regions"
 
 export const metadata: Metadata = {
-  title: "Medusa Next.js Starter Template",
+  title: "Sterke Marktparasols in verschillende maten",
   description:
-    "A performant frontend ecommerce starter template with Next.js 14 and Medusa.",
+    "Koop uw marktparasols bij markt-parasol.nl. Voorzie uw parasol van logo of tekst.",
 }
 
 export default async function Home({
