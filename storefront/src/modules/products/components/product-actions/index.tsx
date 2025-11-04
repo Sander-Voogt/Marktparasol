@@ -184,9 +184,9 @@ export default function ProductActions({
           data-testid="add-product-button"
         >
           {!selectedVariant
-            ? "Select variant"
+            ? "Selecteer opties"
             : !inStock
-            ? "Out of stock"
+            ? "Uitverkocht"
             : "In Winkelwagen"}
         </Button>
         <MobileActions
