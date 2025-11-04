@@ -22,6 +22,16 @@ export const isOrderPlacedTemplateData = (data: any): data is OrderPlacedTemplat
 export const OrderPlacedTemplate: React.FC<OrderPlacedTemplateProps> & {
   PreviewProps: OrderPlacedPreviewProps
 } = ({ order, shippingAddress, preview = 'Your order has been placed!' }) => {
+
+const orderdate = new Date(order.created_at);
+const yyyy = orderdate.getFullYear();
+
+let mm: string = String(orderdate.getMonth() + 1).padStart(2, '0');
+let dd: string = String(orderdate.getDate()).padStart(2, '0');
+
+const formattedDate = `${dd}-${mm}-${yyyy}`;
+
+
   return (
     <Base preview={preview}>
       <Section>
@@ -44,7 +54,7 @@ export const OrderPlacedTemplate: React.FC<OrderPlacedTemplateProps> & {
           Order ID: {order.display_id}
         </Text>
         <Text style={{ margin: '0 0 5px' }}>
-          Order datum: {new Date(order.created_at).toLocaleDateString()}
+          Order datum: {formattedDate}
         </Text>
         <Text style={{ margin: '0 0 20px' }}>
           Totaal: {order.summary.raw_current_order_total.value} {order.currency_code}
