@@ -218,7 +218,7 @@ const Payment = ({
           >
             {!activeSession && isStripeFunc(selectedPaymentMethod)
               ? " Enter card details"
-              : "Continue to review"}
+              : "Verder"}
           </Button>
         </div>
 
