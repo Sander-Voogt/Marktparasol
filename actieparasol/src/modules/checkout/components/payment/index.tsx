@@ -136,7 +136,7 @@ const Payment = ({
               className="text-ui-fg-interactive hover:text-ui-fg-interactive-hover"
               data-testid="edit-payment-button"
             >
-              Edit
+              Bewerken
             </button>
           </Text>
         )}
@@ -253,7 +253,7 @@ const Payment = ({
                   <Text>
                     {isStripeFunc(selectedPaymentMethod) && cardBrand
                       ? cardBrand
-                      : "Another step will appear"}
+                      : "-"}
                   </Text>
                 </div>
               </div>

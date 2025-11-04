@@ -34,20 +34,20 @@ export const OrderPlacedTemplate: React.FC<OrderPlacedTemplateProps> & {
         </Text>
 
         <Text style={{ margin: '0 0 30px' }}>
-          Thank you for your recent order! Here are your order details:
+          Bedankt voor uw bestelling. Hierbij een overzicht van uw bestelling:
         </Text>
 
         <Text style={{ fontSize: '18px', fontWeight: 'bold', margin: '0 0 10px' }}>
-          Order Summary
+          Order overzicht
         </Text>
         <Text style={{ margin: '0 0 5px' }}>
           Order ID: {order.display_id}
         </Text>
         <Text style={{ margin: '0 0 5px' }}>
-          Order Date: {new Date(order.created_at).toLocaleDateString()}
+          Order datum: {new Date(order.created_at).toLocaleDateString()}
         </Text>
         <Text style={{ margin: '0 0 20px' }}>
-          Total: {order.summary.raw_current_order_total.value} {order.currency_code}
+          Totaal: {order.summary.raw_current_order_total.value} {order.currency_code}
         </Text>
 
         <Hr style={{ margin: '20px 0' }} />
@@ -85,8 +85,8 @@ export const OrderPlacedTemplate: React.FC<OrderPlacedTemplateProps> & {
             borderBottom: '1px solid #ddd'
           }}>
             <Text style={{ fontWeight: 'bold' }}>Item</Text>
-            <Text style={{ fontWeight: 'bold' }}>Quantity</Text>
-            <Text style={{ fontWeight: 'bold' }}>Price</Text>
+            <Text style={{ fontWeight: 'bold' }}>Aantal</Text>
+            <Text style={{ fontWeight: 'bold' }}>Prijs</Text>
           </div>
           {order.items.map((item) => (
             <div key={item.id} style={{
@@ -95,7 +95,7 @@ export const OrderPlacedTemplate: React.FC<OrderPlacedTemplateProps> & {
               padding: '8px',
               borderBottom: '1px solid #ddd'
             }}>
-              <Text>{item.title} - {item.product_title}</Text>
+              <Text>{item.title}</Text>
               <Text>{item.quantity}</Text>
               <Text>{item.unit_price} {order.currency_code}</Text>
             </div>
