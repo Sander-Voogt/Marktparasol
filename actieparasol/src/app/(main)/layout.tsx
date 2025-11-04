@@ -24,9 +24,9 @@ export default async function PageLayout(props: { children: React.ReactNode }) {
             tenten. Daarnaast kunt u zijzeilen met of zonder raam bij de parasol
             of tent in uw gewenste kleur bestellen.
           </p>
-          <button className="bg-orange-500 hover:bg-orange-600 text-white px-6 py-3 rounded-full font-medium transition">
+          <a href="/store" className="bg-orange-500 hover:bg-orange-600 text-white px-6 py-3 rounded-full font-medium transition">
             Bekijk onze producten →
-          </button>
+          </a>
         </section>
 
         {/* Info Section */}
@@ -35,8 +35,8 @@ export default async function PageLayout(props: { children: React.ReactNode }) {
           <div>
             <h2 className="text-2xl font-bold mb-4">Klanten kiezen voor</h2>
             <div className="flex items-center gap-3 mb-6">
-              <div className="w-20 h-20 bg-gray-300 rounded flex items-center justify-center">
-                <span className="text-gray-600 font-bold">Logo</span>
+              <div className="w-100 h-20 rounded flex items-center justify-center">
+                <span className="font-bold"><img src="/img/actieparasol-logo.svg" width={100} height={30}/></span>
               </div>
             </div>
             <ul className="space-y-3 text-gray-700">
@@ -51,55 +51,13 @@ export default async function PageLayout(props: { children: React.ReactNode }) {
           </div>
 
           {/* Image Placeholder */}
-          <div className="flex-shrink-0">
-            <div className="w-48 h-64 bg-gray-300 rounded-2xl flex items-center justify-center">
-              <span className="text-gray-600 font-bold">Foto</span>
-            </div>
-          </div>
+          {/* <div className="flex-shrink-0">
+            <img src="/img/footer-image.png" />
+          </div> */}
         </section>
 
         {/* Contact Section */}
-        <section className="mt-12 text-center md:text-left px-4 md:px-12 py-8 border-t border-gray-200">
-          <div className="grid md:grid-cols-3 gap-8">
-            <div>
-              <h3 className="font-bold flex items-center gap-2">📍 Adres</h3>
-              <p className="text-gray-700">
-                Prins der Nederlandenstraat 15
-                <br />
-                3151 SB Hoek van Holland
-              </p>
-            </div>
-
-            <div>
-              <h3 className="font-bold flex items-center gap-2">💬 Mail ons</h3>
-              <p className="text-gray-700">info@actieparasol.nl</p>
-            </div>
-
-            <div>
-              <h3 className="font-bold flex items-center gap-2">☎️ Bel ons</h3>
-              <p className="text-gray-700">0617360645</p>
-            </div>
-          </div>
-
-          {/* Footer Links */}
-          <div className="mt-10 border-t border-gray-200 pt-6 text-sm text-gray-600 flex flex-wrap justify-center gap-4">
-            <a href="#" className="hover:text-gray-900">
-              Algemene voorwaarden
-            </a>
-            <a href="#" className="hover:text-gray-900">
-              Over ons
-            </a>
-            <a href="#" className="hover:text-gray-900">
-              Contact
-            </a>
-            <a href="#" className="hover:text-gray-900">
-              Strandstoelen kopen
-            </a>
-            <a href="#" className="hover:text-gray-900">
-              Abraham Sarah huren
-            </a>
-          </div>
-        </section>
+       
       </div>
       <Footer />
     </>

@@ -77,39 +77,6 @@ export default async function Nav() {
               <CartButton />
             </Suspense>
           </div>
-          <div className="hidden small:flex items-center gap-x-6 h-full">
-              {process.env.NEXT_PUBLIC_FEATURE_SEARCH_ENABLED && (
-                <LocalizedClientLink
-                  className="hover:text-ui-fg-base"
-                  href="/search"
-                  scroll={false}
-                  data-testid="nav-search-link"
-                >
-                  Zoeken
-                </LocalizedClientLink>
-              )}
-              <LocalizedClientLink
-                className="hover:text-ui-fg-base"
-                href="/account"
-                data-testid="nav-account-link"
-              >
-                Account
-              </LocalizedClientLink>
-               <LocalizedClientLink
-                className="hover:text-ui-fg-base"
-                href="/offerte-aanvragen"
-                data-testid="nav-account-link"
-              >
-                Offerte aanvragen
-              </LocalizedClientLink>
-                             <LocalizedClientLink
-                className="hover:text-ui-fg-base"
-                href="/contact"
-                data-testid="nav-account-link"
-              >
-                Contact
-              </LocalizedClientLink>
-            </div>
         </nav>
       </header>
     </div>
