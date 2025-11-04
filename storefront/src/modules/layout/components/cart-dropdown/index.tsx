@@ -76,7 +76,7 @@ const CartDropdown = ({
       onMouseLeave={close}
     >
       <Popover className="relative h-full">
-        <Popover.Button className="h-full">
+        <Popover.Button className="h-full text-lg">
           <LocalizedClientLink
             className="hover:text-ui-fg-base"
             href="/cart"
@@ -99,7 +99,7 @@ const CartDropdown = ({
             data-testid="nav-cart-dropdown"
           >
             <div className="p-4 flex items-center justify-center">
-              <h3 className="text-large-semi">Cart</h3>
+              <h3 className="text-large-semi">Winkelwagen</h3>
             </div>
             {cartState && cartState.items?.length ? (
               <>
