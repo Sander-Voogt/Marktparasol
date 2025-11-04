@@ -31,7 +31,6 @@ export default function OrderCompletedTemplate({
             level="h1"
             className="flex flex-col gap-y-3 text-ui-fg-base text-3xl mb-4"
           >
-            <span>Thank you!</span>
             <span>Uw bestelling is geplaatst. Wij nemen spoedig contact met u op over de levering</span>
           </Heading>
           <OrderDetails order={order} />
