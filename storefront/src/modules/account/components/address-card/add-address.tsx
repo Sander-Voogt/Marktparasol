@@ -60,14 +60,14 @@ const AddAddress = ({ region }: { region: HttpTypes.StoreRegion }) => {
             <div className="flex flex-col gap-y-2">
               <div className="grid grid-cols-2 gap-x-2">
                 <Input
-                  label="First name"
+                  label="Voornaam"
                   name="first_name"
                   required
                   autoComplete="given-name"
                   data-testid="first-name-input"
                 />
                 <Input
-                  label="Last name"
+                  label="Achternaam"
                   name="last_name"
                   required
                   autoComplete="family-name"
@@ -75,20 +75,20 @@ const AddAddress = ({ region }: { region: HttpTypes.StoreRegion }) => {
                 />
               </div>
               <Input
-                label="Company"
+                label="Bedrijfsnaam"
                 name="company"
                 autoComplete="organization"
                 data-testid="company-input"
               />
               <Input
-                label="Address"
+                label="Adres"
                 name="address_1"
                 required
                 autoComplete="address-line1"
                 data-testid="address-1-input"
               />
               <Input
-                label="Apartment, suite, etc."
+                label="Huisnummer"
                 name="address_2"
                 autoComplete="address-line2"
                 data-testid="address-2-input"
@@ -102,7 +102,7 @@ const AddAddress = ({ region }: { region: HttpTypes.StoreRegion }) => {
                   data-testid="postal-code-input"
                 />
                 <Input
-                  label="City"
+                  label="Woonplaats"
                   name="city"
                   required
                   autoComplete="locality"
@@ -110,7 +110,7 @@ const AddAddress = ({ region }: { region: HttpTypes.StoreRegion }) => {
                 />
               </div>
               <Input
-                label="Province / State"
+                label="Provincie"
                 name="province"
                 autoComplete="address-level1"
                 data-testid="state-input"
@@ -123,7 +123,7 @@ const AddAddress = ({ region }: { region: HttpTypes.StoreRegion }) => {
                 data-testid="country-select"
               />
               <Input
-                label="Phone"
+                label="Telefoonnummer"
                 name="phone"
                 autoComplete="phone"
                 data-testid="phone-input"
