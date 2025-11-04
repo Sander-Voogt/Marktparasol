@@ -174,7 +174,7 @@ const ShippingAddress = ({
       </div>
       <div className="my-8">
         <Checkbox
-          label="Billing address same as shipping address"
+          label="Factuur adres is hetzelfde als bezorgadres"
           name="same_as_billing"
           checked={checked}
           onChange={onChange}
