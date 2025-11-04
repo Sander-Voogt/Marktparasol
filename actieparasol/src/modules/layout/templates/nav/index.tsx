@@ -10,7 +10,7 @@ export default async function Nav() {
   const regions = await listRegions().then((regions: StoreRegion[]) => regions)
 
   return (
-    <div className="sticky top-0 inset-x-0 z-50 group">
+    <div className="sticky top-0 inset-x-0 z-50 group bg-orange-400">
       <header className="relative h-16 mx-auto border-b duration-200 bg-white border-ui-border-base">
         <nav className="content-container txt-xsmall-plus text-ui-fg-subtle flex items-center justify-between w-full h-full text-small-regular">
           <div className="flex-1 basis-0 h-full flex items-center">
@@ -25,7 +25,7 @@ export default async function Nav() {
               className="txt-compact-xlarge-plus hover:text-ui-fg-base uppercase"
               data-testid="nav-store-link"
             >
-              Markt-Parasol.nl
+              <img src="/img/actieparasol-logo.svg" alt="ActieParasol.nl logo" height={20} width={150}/>
             </LocalizedClientLink>
           </div>
 
@@ -77,6 +77,39 @@ export default async function Nav() {
               <CartButton />
             </Suspense>
           </div>
+          <div className="hidden small:flex items-center gap-x-6 h-full">
+              {process.env.NEXT_PUBLIC_FEATURE_SEARCH_ENABLED && (
+                <LocalizedClientLink
+                  className="hover:text-ui-fg-base"
+                  href="/search"
+                  scroll={false}
+                  data-testid="nav-search-link"
+                >
+                  Zoeken
+                </LocalizedClientLink>
+              )}
+              <LocalizedClientLink
+                className="hover:text-ui-fg-base"
+                href="/account"
+                data-testid="nav-account-link"
+              >
+                Account
+              </LocalizedClientLink>
+               <LocalizedClientLink
+                className="hover:text-ui-fg-base"
+                href="/offerte-aanvragen"
+                data-testid="nav-account-link"
+              >
+                Offerte aanvragen
+              </LocalizedClientLink>
+                             <LocalizedClientLink
+                className="hover:text-ui-fg-base"
+                href="/contact"
+                data-testid="nav-account-link"
+              >
+                Contact
+              </LocalizedClientLink>
+            </div>
         </nav>
       </header>
     </div>
