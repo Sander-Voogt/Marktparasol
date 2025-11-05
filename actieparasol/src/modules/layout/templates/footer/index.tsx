@@ -21,7 +21,7 @@ export default async function Footer() {
               ActieParasol.nl
             </LocalizedClientLink>
           </div>
-          <div className="text-small-regular gap-10 md:gap-x-16 grid grid-cols-2 sm:grid-cols-3">
+          <div className="text-small-regular gap-10 md:gap-x-16 grid grid-cols-2 sm:grid-cols-4">
             {product_categories && product_categories?.length > 0 && (
               <div className="flex flex-col gap-y-2">
                 <span className="txt-small-plus txt-ui-fg-base">
@@ -106,6 +106,15 @@ export default async function Footer() {
                 </ul>
               </div>
             )}
+             <div className="flex flex-col gap-y-2">
+              <span className="txt-small-plus txt-ui-fg-base">Pagina's</span>
+              <ul className="grid grid-cols-1 gap-y-2 text-ui-fg-subtle txt-small">
+                <li><a href="/over-ons">Over Ons</a></li>
+                <li><a href="/contact">Contact</a></li>
+                <li><a href="/pagina/algemene-voorwaarden">Algemene voorwaarden</a></li>
+                <li><a href="/pagina/cookiebeleid">Cookiebeleid</a></li>
+              </ul>
+            </div>
             <div className="flex flex-col gap-y-2">
               <span className="txt-small-plus txt-ui-fg-base">VGT Online</span>
               <ul className="grid grid-cols-1 gap-y-2 text-ui-fg-subtle txt-small">

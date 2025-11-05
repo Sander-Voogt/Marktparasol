@@ -9,7 +9,7 @@ export default function Page() {
         <div>
           <p>
             Levert (markt)parasols, easy up tenten, kramen onder ons eigen merk.
-            In Nunspeet hebben we een showroom waar u op afspraak van harte
+            In Hoek van Holland hebben we een showroom waar u op afspraak van harte
             welkom bent. Ons team geeft u een eerlijk advies, zodat u de juist
             beslissing kunt maken.
           </p>
