@@ -48,7 +48,7 @@ const ShippingAddress = ({
         "shipping_address.postal_code": address?.postal_code || "",
         "shipping_address.city": address?.city || "",
         "shipping_address.country_code": address?.country_code || "",
-        "shipping_address.province": address?.province || "",
+        "shipping_address.province": address?.province || "-",
         "shipping_address.phone": address?.phone || "",
       }))
 
