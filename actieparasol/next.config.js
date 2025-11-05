@@ -77,7 +77,7 @@ const nextConfig = {
       },
       {
         source: "/producten/easy-up-vouwtent",
-        destination: "/collections/easy-up-vouwtent",
+        destination: "/collections/vouwtent",
         permanent: true,
       },
       {
@@ -86,7 +86,7 @@ const nextConfig = {
         permanent: true,
       },
       {
-        source: "/producten/marktparasol-4-hoek/",
+        source: "/producten/marktparasol-4-hoek",
         destination: "/collections/markt-parasols",
         permanent: true,
       },
