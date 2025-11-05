@@ -57,7 +57,7 @@ const ProductTemplate: React.FC<ProductTemplateProps> = ({
         </div>
       </div>
       <div className="content-container my-16 small:my-32">
-        <ProductDescription content={product?.metadata?.maindescription} />
+        <ProductDescription content={product?.metadata?.actieparasoldescription} />
       </div>
       <div
         className="content-container my-16 small:my-32"

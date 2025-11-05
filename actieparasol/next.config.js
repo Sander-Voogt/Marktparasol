@@ -76,24 +76,43 @@ const nextConfig = {
         permanent: true,
       },
       {
-        source: "/parasol/2x3-meter-parasol",
-        destination: "/products/marktparasol-2x3-meter-metaal",
+        source: "/producten/easy-up-vouwtent",
+        destination: "/collections/easy-up-vouwtent",
         permanent: true,
       },
       {
-        source: "/parasol/3x4-meter-parasol",
-        destination: "/products/marktparasol-3x4-meter-metaal",
+        source: "/producten/horecaparasol",
+        destination: "/collections/horeca-parasols",
         permanent: true,
       },
       {
-        source: "/parasol-met-bedrukking",
-        destination: "/offerte-aanvragen",
-        permanent: true,
-      },
-
-      {
-        source: "/parasol/:path*",
+        source: "/producten/marktparasol-4-hoek/",
         destination: "/collections/markt-parasols",
+        permanent: true,
+      },
+      {
+        source: "/producten",
+        destination: "/store",
+        permanent: true,
+      },
+      {
+        source: "/producten/marktkraam",
+        destination: "/",
+        permanent: true,
+      },
+      {
+        source: "/producten/tent",
+        destination: "/",
+        permanent: true,
+      },
+      {
+        source: "/producten/tuinhuisje",
+        destination: "/",
+        permanent: true,
+      },
+      {
+        source: "/contact/:path*",
+        destination: "/contact",
         permanent: true,
       },
     ]

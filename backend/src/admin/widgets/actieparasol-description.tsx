@@ -28,7 +28,7 @@ const MainDescriptionWrapper = ({
 };
 
 type CustomFields = {
-  maindescription: string;
+  actieparasoldescription: string;
 };
 
 type Props = {
@@ -39,7 +39,7 @@ type Props = {
 const MainDescriptionForm = ({ productCategoryId, metadata }: Props) => {
   const form = useForm<CustomFields>({
     defaultValues: {
-      maindescription: metadata.maindescription || ""
+      actieparasoldescription: metadata.actieparasoldescription || ""
     },
   });
 
@@ -68,7 +68,7 @@ const MainDescriptionForm = ({ productCategoryId, metadata }: Props) => {
 
       <FocusModal>
         <FocusModal.Trigger asChild>
-          <Button>Marktparasol beschrijving</Button>
+          <Button>Actieparasol beschrijving</Button>
         </FocusModal.Trigger>
         <FocusModal.Content>
           <FocusModal.Header>
@@ -81,8 +81,8 @@ const MainDescriptionForm = ({ productCategoryId, metadata }: Props) => {
                 <form onSubmit={form.handleSubmit(onSubmit)}>
                 <Label>Main description</Label>
                   <TiptapEditor
-                    value={form.watch("maindescription") || ""}
-                    onChange={(value) => form.setValue("maindescription", value)}
+                    value={form.watch("actieparasoldescription") || ""}
+                    onChange={(value) => form.setValue("actieparasoldescription", value)}
                   />
                   <Button type="submit" className="mt-4">Save</Button>
                 </form>
