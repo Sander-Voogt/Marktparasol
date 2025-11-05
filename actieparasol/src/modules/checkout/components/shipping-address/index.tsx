@@ -162,7 +162,7 @@ const ShippingAddress = ({
           required
           data-testid="shipping-country-select"
         />
-        <Input
+        {/* <Input
           label="State / Province"
           name="shipping_address.province"
           autoComplete="address-level1"
@@ -170,7 +170,7 @@ const ShippingAddress = ({
           onChange={handleChange}
           required
           data-testid="shipping-province-input"
-        />
+        /> */}
       </div>
       <div className="my-8">
         <Checkbox
