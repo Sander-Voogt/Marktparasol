@@ -22,6 +22,8 @@ export default async function Home({
     return null
   }
 
+  console.log(collections)
+
   return (
     <>
       <Hero />
