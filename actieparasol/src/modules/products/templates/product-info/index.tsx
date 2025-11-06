@@ -1,3 +1,4 @@
+'use client'
 import { getProductPrice } from "@lib/util/get-product-price"
 import { HttpTypes } from "@medusajs/types"
 import { Heading, Text } from "@medusajs/ui"
@@ -10,7 +11,7 @@ type ProductInfoProps = {
 }
 
 const ProductInfo = ({ product }: ProductInfoProps) => {
-  
+
   useEffect(() => {
     if (!product || !product.id) return
 
