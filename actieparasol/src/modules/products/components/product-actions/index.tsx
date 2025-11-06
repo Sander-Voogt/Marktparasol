@@ -13,6 +13,8 @@ import MobileActions from "./mobile-actions"
 import ProductPrice from "../product-price"
 import { addToCart } from "@lib/data/cart"
 import { HttpTypes } from "@medusajs/types"
+import { getProductPrice } from "@lib/util/get-product-price"
+import { sendGTMEvent } from "@next/third-parties/google"
 
 type ProductActionsProps = {
   product: HttpTypes.StoreProduct
@@ -105,6 +107,29 @@ export default function ProductActions({
     if (!selectedVariant?.id) return null
 
     setIsAdding(true)
+    
+    const { cheapestPrice } = getProductPrice({
+      product,
+      variantId: selectedVariant.id,
+    })
+
+    console.log(cheapestPrice)
+    if (cheapestPrice) {
+      sendGTMEvent({
+        event: "add_to_cart",
+        ecommerce: {
+          currency: region.currency_code.toUpperCase(),
+          value: cheapestPrice.calculated_price,
+          items: [
+            {
+              item_id: product.id,
+              item_name: product.title,
+              price: cheapestPrice.calculated_price,
+            },
+          ],
+        },
+      })
+    }
 
     await addToCart({
       variantId: selectedVariant.id,
