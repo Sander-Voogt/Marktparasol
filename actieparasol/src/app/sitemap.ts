@@ -25,7 +25,7 @@ export default async function sitemap({
     
     response.products.map((product) => (
       recordlist.push({
-        url: `https://markt-parasol.nl/products/${product.handle}`,
+        url: `https://actieparasol.nl/products/${product.handle}`,
         lastModified: product.updated_at ? product.updated_at : '-',
         changeFrequency: 'weekly',
         priority: 1,
