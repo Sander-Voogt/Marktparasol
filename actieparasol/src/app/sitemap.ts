@@ -33,7 +33,7 @@ export default async function sitemap({
     ))
 
     recordlist.push({
-      url: 'https://markt-parasol.nl/offerte-aanvragen',
+      url: 'https://actieparasol.nl/offerte-aanvragen',
       lastModified: '2025-09-15T20:59:27.144Z',
       changeFrequency: 'weekly',
       priority: 1,
