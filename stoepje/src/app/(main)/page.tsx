@@ -2,13 +2,14 @@ import { Metadata } from "next"
 
 import FeaturedProducts from "@modules/home/components/featured-products"
 import Hero from "@modules/home/components/hero"
-import { getCollectionsWithProducts } from "@lib/data/collections"
+import { getCollectionByHandle, getCollectionsWithProducts } from "@lib/data/collections"
 import { getRegion } from "@lib/data/regions"
+import ProductRail from "@modules/home/components/featured-products/product-rail"
 
 export const metadata: Metadata = {
-  title: "Sterke Marktparasols in verschillende maten",
+  title: "Stoepje bedrukte producten",
   description:
-    "Koop uw marktparasols bij markt-parasol.nl. Voorzie uw parasol van logo of tekst.",
+    "",
 }
 
 export default async function Home({
@@ -17,6 +18,9 @@ export default async function Home({
   params: { countryCode: string }
 }) {
   const collections = await getCollectionsWithProducts("nl")
+  const parasols = await getCollectionByHandle('stoepje-parasols')
+  const kleding = await getCollectionByHandle('stoepje-kleding')
+
   const region = await getRegion("nl")
 
   if (!collections || !region) {
@@ -28,11 +32,16 @@ export default async function Home({
       <Hero />
       <div className="py-12">
         <ul className="flex flex-col gap-x-6">
-          <FeaturedProducts collections={collections} region={region} />
+          <li key={parasols.id}>
+            <ProductRail collection={parasols} region={region} />
+          </li>
+          <li key={kleding.id}>
+            <ProductRail collection={kleding} region={region} />
+          </li>
         </ul>
       </div>
       <div className="max-w-7xl mx-auto text-lg">
-       
+
       </div>
     </>
   )

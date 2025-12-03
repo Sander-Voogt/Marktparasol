@@ -7,9 +7,9 @@ const Hero = () => {
         <div className="flex flex-col md:flex-row">
           <div className="basis-1/2 m-8">
             <h3 className="text-5xl mb-8 mt-8">
-              Bestel eenvoudig producten met het logo van stoepje. 
+              Bestel eenvoudig producten met het logo van stoepje.
             </h3>
-            
+            <p>Hieronder staan de producten in verschillende categorien. Mis je een product laat het dan weten via het contact formulier.</p>
           </div>
           <div className="basis-1/2 items-center">
             

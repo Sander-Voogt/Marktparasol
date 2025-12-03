@@ -21,7 +21,7 @@ export default function ProductRail({
     <div className="content-container py-12 small:py-24">
       <div className="flex justify-between mb-8">
         <p className="text-center text-3xl font-semibold">
-            Marktparasols in 4 formaten
+            {collection.title}
           </p>
         {/* <Text className="txt-xlarge">{collection.title}</Text> */}
         <InteractiveLink href={`/collections/${collection.handle}`}>
