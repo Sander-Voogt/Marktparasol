@@ -2,7 +2,7 @@ import { Metadata } from "next"
 
 import FeaturedProducts from "@modules/home/components/featured-products"
 import Hero from "@modules/home/components/hero"
-import { getCollectionByHandle, getCollectionsWithProducts } from "@lib/data/collections"
+import { getCollectionByHandle, getCollectionsByHandleWithProducts, getCollectionsWithProducts } from "@lib/data/collections"
 import { getRegion } from "@lib/data/regions"
 import ProductRail from "@modules/home/components/featured-products/product-rail"
 
@@ -18,8 +18,9 @@ export default async function Home({
   params: { countryCode: string }
 }) {
   const collections = await getCollectionsWithProducts("nl")
-  const parasols = await getCollectionByHandle('stoepje-parasols')
-  const kleding = await getCollectionByHandle('stoepje-kleding')
+  const parasols = await getCollectionsByHandleWithProducts('stoepje-parasols')
+  const kleding = await getCollectionsByHandleWithProducts('stoepje-kleding')
+  console.log(parasols, kleding)
 
   const region = await getRegion("nl")
 

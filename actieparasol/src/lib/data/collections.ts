@@ -43,7 +43,7 @@ export const getCollectionByHandleMeta = cache(async function (
 
 export const getCollectionsWithProducts = cache(
   async (countryCode: string): Promise<HttpTypes.StoreCollection[] | null> => {
-    const { collections } = await getCollectionsList(0, 3)
+    const { collections } = await getCollectionsList(0, 10)
 
     if (!collections) {
       return null

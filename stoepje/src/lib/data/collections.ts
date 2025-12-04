@@ -75,3 +75,34 @@ export const getCollectionsWithProducts = cache(
     return collections as unknown as HttpTypes.StoreCollection[]
   }
 )
+
+
+export const getCollectionsByHandleWithProducts = cache(
+  async (handle: string): Promise<HttpTypes.StoreCollection[] | null> => {
+    const collection = await getCollectionByHandle(handle)
+
+    if (!collection) {
+      return null
+    }
+
+    const collectionIds = collection.id
+
+    const { response } = await getProductsList({
+      queryParams: { collection_id: collectionIds },
+      countryCode: 'nl',
+    })
+
+    response.products.forEach((product) => {
+
+      if (collection) {
+        if (!collection.products) {
+          collection.products = []
+        }
+
+        collection.products.push(product as any)
+      }
+    })
+
+    return collection as unknown as HttpTypes.StoreCollection[]
+  }
+)
