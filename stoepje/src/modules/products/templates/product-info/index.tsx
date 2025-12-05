@@ -13,14 +13,15 @@ type ProductInfoProps = {
 
 const ProductInfo = ({ product }: ProductInfoProps) => {
   useEffect(() => {
-    fetch('/api/auth-check')
+    fetch("/api/auth-check")
       .then((res) => {
-        console.log(res)
+        if (!res.ok) {
+          window.location.href = "/account"
+        }
       })
-
-      // .catch(() => {
-      //     window.location.href = "/account"
-      // })
+      .catch(() => {
+        window.location.href = "/account"
+      })
   }, [])
   useEffect(() => {
     if (!product || !product.id) return

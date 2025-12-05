@@ -1,13 +1,16 @@
 import { sdk } from "@lib/config"
+import { getCustomer } from "@lib/data/customer"
 
 
 export const GET = async (req: Request) => {
-  const customer = sdk.store.customer.retrieve()
+    const customer = await getCustomer()
 
   console.log(customer)
-
-  return Response.json({
+  if(customer){
+    return Response.json({
     authenticated: true,
-    customer_id: customer,
   })
+  } 
+
+  return Response.error()
 }
