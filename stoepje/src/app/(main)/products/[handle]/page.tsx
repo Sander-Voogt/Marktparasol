@@ -4,10 +4,12 @@ import { notFound } from "next/navigation"
 import ProductTemplate from "@modules/products/templates"
 import { getRegion, listRegions } from "@lib/data/regions"
 import { getProductByHandle, getProductsList } from "@lib/data/products"
+import { sdk } from "@lib/config"
 
 type Props = {
   params: { countryCode: string; handle: string }
 }
+
 
 export async function generateStaticParams() {
   const countryCodes = await listRegions().then(
@@ -68,6 +70,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
 }
 
 export default async function ProductPage({ params }: Props) {
+
   const region = await getRegion('nl')
 
   if (!region) {

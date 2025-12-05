@@ -18,7 +18,7 @@ export default async function Footer() {
               href="/"
               className="txt-compact-xlarge-plus text-ui-fg-subtle hover:text-ui-fg-base uppercase"
             >
-              Markt-Parasol.nl
+              
             </LocalizedClientLink>
           </div>
           <div className="text-small-regular gap-10 md:gap-x-16 grid grid-cols-2 sm:grid-cols-3">
@@ -30,7 +30,7 @@ export default async function Footer() {
                 <li>Prins der Nederlandenstraat 15</li>
                 <li>3151SB Hoek van Holland</li>
                 <li>0617360645</li>
-                <li>info@Markt-Parasol.nl</li>
+                <li>stoepje@actieparasol.nl</li>
                 <li>KVK: 69551731</li>
               </ul>
             </div>

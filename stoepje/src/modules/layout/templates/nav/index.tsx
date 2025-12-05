@@ -22,7 +22,7 @@ export default async function Nav() {
           <div className="flex items-center h-full">
             <LocalizedClientLink
               href="/"
-              className="txt-compact-xlarge-plus hover:text-ui-fg-base uppercase"
+              className="txt-compact-xlarge-plus hover:text-white uppercase"
               data-testid="nav-store-link"
             >
               <img src="/img/stoepje.png" width={150} height={50}/> 
@@ -33,7 +33,7 @@ export default async function Nav() {
             <div className="hidden text-lg small:flex items-center gap-x-6 h-full">
               {process.env.NEXT_PUBLIC_FEATURE_SEARCH_ENABLED && (
                 <LocalizedClientLink
-                  className="hover:text-ui-fg-base"
+                  className="hover:text-white"
                   href="/search"
                   scroll={false}
                   data-testid="nav-search-link"
@@ -42,21 +42,21 @@ export default async function Nav() {
                 </LocalizedClientLink>
               )}
               <LocalizedClientLink
-                className="hover:text-ui-fg-base"
+                className="hover:text-white"
                 href="/account"
                 data-testid="nav-account-link"
               >
                 Account
               </LocalizedClientLink>
                <LocalizedClientLink
-                className="hover:text-ui-fg-base"
+                className="hover:text-white"
                 href="/offerte-aanvragen"
                 data-testid="nav-account-link"
               >
                 Offerte aanvragen
               </LocalizedClientLink>
                              <LocalizedClientLink
-                className="hover:text-ui-fg-base"
+                className="hover:text-white"
                 href="/contact"
                 data-testid="nav-account-link"
               >
@@ -66,7 +66,7 @@ export default async function Nav() {
             <Suspense
               fallback={
                 <LocalizedClientLink
-                  className="hover:text-ui-fg-base flex gap-2"
+                  className="hover:text-white flex gap-2"
                   href="/cart"
                   data-testid="nav-cart-link"
                 >

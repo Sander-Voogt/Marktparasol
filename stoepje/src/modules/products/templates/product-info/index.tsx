@@ -1,4 +1,5 @@
 "use client"
+import { sdk } from "@lib/config"
 import { getProductPrice } from "@lib/util/get-product-price"
 import { HttpTypes } from "@medusajs/types"
 import { Heading, Text } from "@medusajs/ui"
@@ -11,6 +12,16 @@ type ProductInfoProps = {
 }
 
 const ProductInfo = ({ product }: ProductInfoProps) => {
+  useEffect(() => {
+    fetch('/api/auth-check')
+      .then((res) => {
+        console.log(res)
+      })
+
+      // .catch(() => {
+      //     window.location.href = "/account"
+      // })
+  }, [])
   useEffect(() => {
     if (!product || !product.id) return
 

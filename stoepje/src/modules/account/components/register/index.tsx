@@ -22,11 +22,9 @@ const Register = ({ setCurrentView }: Props) => {
       data-testid="register-page"
     >
       <h1 className="text-large-semi uppercase mb-6">
-        Become a Markt-Parasol.nl Member
+        Registeren
       </h1>
       <p className="text-center text-base-regular text-ui-fg-base mb-4">
-        Create your Markt-Parasol.nl Member profile, and get access to an enhanced
-        shopping experience.
       </p>
       <form className="w-full flex flex-col" action={formAction}>
         <div className="flex flex-col w-full gap-y-2">

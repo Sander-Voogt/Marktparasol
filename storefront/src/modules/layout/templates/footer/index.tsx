@@ -80,32 +80,44 @@ export default async function Footer() {
                 </ul>
               </div>
             )}
-            {collections && collections.length > 0 && (
-              <div className="flex flex-col gap-y-2">
-                <span className="txt-small-plus txt-ui-fg-base">
-                  Collections
-                </span>
-                <ul
-                  className={clx(
-                    "grid grid-cols-1 gap-2 text-ui-fg-subtle txt-small",
-                    {
-                      "grid-cols-2": (collections?.length || 0) > 3,
-                    }
-                  )}
-                >
-                  {collections?.slice(0, 6).map((c) => (
-                    <li key={c.id}>
-                      <LocalizedClientLink
-                        className="hover:text-ui-fg-base"
-                        href={`/collections/${c.handle}`}
-                      >
-                        {c.title}
-                      </LocalizedClientLink>
-                    </li>
-                  ))}
-                </ul>
-              </div>
-            )}
+            {/* {collections && collections.length > 0 && ( */}
+            <div className="flex flex-col gap-y-2">
+              <span className="txt-small-plus txt-ui-fg-base"></span>
+              <ul
+                className={clx(
+                  "grid grid-cols-1 gap-2 text-ui-fg-subtle txt-small"
+                  // {
+                  //   "grid-cols-2": (collections?.length || 0) > 3,
+                  // }
+                )}
+              >
+                {/* {collections?.slice(0, 6).map((c) => ( */}
+                <li>
+                  <LocalizedClientLink
+                    className="hover:text-ui-fg-base"
+                    href={`/collections/horeca-parasols`}
+                  >
+                    Horeca Parasols
+                  </LocalizedClientLink>
+                </li>
+                <li>
+                  <LocalizedClientLink
+                    className="hover:text-ui-fg-base"
+                    href={`/collections/markt-parasols`}
+                  >
+                    Markt Parasols
+                  </LocalizedClientLink>
+                </li>
+                <li>
+                  <LocalizedClientLink
+                    className="hover:text-ui-fg-base"
+                    href={`/collections/vouwtent`}
+                  >
+                    Vouwtent
+                  </LocalizedClientLink>
+                </li>
+              </ul>
+            </div>
             <div className="flex flex-col gap-y-2">
               <span className="txt-small-plus txt-ui-fg-base">VGT Online</span>
               <ul className="grid grid-cols-1 gap-y-2 text-ui-fg-subtle txt-small">
