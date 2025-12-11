@@ -9,7 +9,7 @@ import TiptapEditor from "../components/CKEditor";
 import { defineWidgetConfig } from "@medusajs/admin-sdk";
 import { sdk } from "../lib/sdk";
 
-const MainDescriptionWrapper = ({
+const GrindPlatenDirectDescription = ({
   data: productCategory,
 }: DetailWidgetProps<AdminProductCategory>) => {
   const { data: queryResult } = useQuery({
@@ -28,8 +28,9 @@ const MainDescriptionWrapper = ({
 };
 
 type CustomFields = {
-  maindescription: string;
-  maindescription_html: string;
+  actieparasoldescription: string;
+    grinddirect_desc: string;
+  grinddirect_desc_html: string;
 };
 
 type Props = {
@@ -40,7 +41,7 @@ type Props = {
 const MainDescriptionForm = ({ productCategoryId, metadata }: Props) => {
   const form = useForm<CustomFields>({
     defaultValues: {
-      maindescription: metadata.maindescription || ""
+      actieparasoldescription: metadata.actieparasoldescription || ""
     },
   });
 
@@ -69,7 +70,7 @@ const MainDescriptionForm = ({ productCategoryId, metadata }: Props) => {
 
       <FocusModal>
         <FocusModal.Trigger asChild>
-          <Button>Marktparasol beschrijving</Button>
+          <Button>GrindplatenDirect beschrijving</Button>
         </FocusModal.Trigger>
         <FocusModal.Content>
           <FocusModal.Header>
@@ -81,13 +82,13 @@ const MainDescriptionForm = ({ productCategoryId, metadata }: Props) => {
               <FormProvider<CustomFields> {...form}>
                 <form onSubmit={form.handleSubmit(onSubmit)}>
                 <Label>Main description</Label>
-                  <TiptapEditor
-                                      value={form.watch("maindescription") || ""}
-                                      onChange={(json, html) => {
-                                        form.setValue("maindescription", json);
-                                        form.setValue("maindescription_html", html);
-                                      }}
-                                    />
+                 <TiptapEditor
+                        value={form.watch("grinddirect_desc") || ""}
+                        onChange={(json, html) => {
+                          form.setValue("grinddirect_desc", json);
+                          form.setValue("grinddirect_desc_html", html);
+                        }}
+                      />
                   <Button type="submit" className="mt-4">Save</Button>
                 </form>
               </FormProvider>
@@ -103,4 +104,4 @@ export const config = defineWidgetConfig({
   zone: "product.details.after",
 });
 
-export default MainDescriptionWrapper;
+export default GrindPlatenDirectDescription;
