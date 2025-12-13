@@ -19,6 +19,7 @@
     "start": "init-backend && cd .medusa/server && medusa start --verbose",
     "dev": "medusa develop",
     "postinstall": "patch-package --no-verify --dir ../..",
+    "prebuild": "patch-package --no-verify",
     "email:dev": "email dev --dir=./src/modules/email-notifications/templates --port=3002"
   },
   "dependencies": {
