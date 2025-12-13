@@ -1,0 +1,51 @@
+diff --git a/node_modules/@medusajs/file-s3/dist/services/s3-file.js b/node_modules/@medusajs/file-s3/dist/services/s3-file.js
+index 1fe6300..fbf3679 100644
+--- a/node_modules/@medusajs/file-s3/dist/services/s3-file.js
++++ b/node_modules/@medusajs/file-s3/dist/services/s3-file.js
+@@ -61,19 +61,36 @@ class S3FileService extends utils_1.AbstractFileProviderService {
+         // TODO: Allow passing a full path for storage per request, not as a global config.
+         const fileKey = `${this.config_.prefix}${parsedFilename.name}-${(0, ulid_1.ulid)()}${parsedFilename.ext}`;
+         let content;
+-        try {
+-            const decoded = Buffer.from(file.content, "base64");
+-            if (decoded.toString("base64") === file.content) {
+-                content = decoded;
+-            }
+-            else {
+-                content = Buffer.from(file.content, "utf8");
+-            }
++
++// Buffer passthrough
++if (Buffer.isBuffer(file.content)) {
++    content = file.content;
++} else {
++    let isBase64 = false;
++    try {
++        const decoded = Buffer.from(file.content, "base64");
++        if (decoded.toString("base64") === file.content) {
++            content = decoded;
++            isBase64 = true;
+         }
+-        catch {
+-            // Last-resort fallback: binary
++    } catch {}
++
++    if (!isBase64) {
++        const mimeType = file.mimeType || "";
++        const isTextFile =
++            mimeType.startsWith("text/") ||
++            mimeType.includes("csv") ||
++            mimeType.includes("json") ||
++            mimeType.includes("xml");
++
++        if (isTextFile) {
++            content = Buffer.from(file.content, "utf8");
++        } else {
+             content = Buffer.from(file.content, "binary");
+         }
++    }
++}
++
+         const command = new client_s3_1.PutObjectCommand({
+             // We probably also want to support a separate bucket altogether for private files
+             // protected private_bucket_: string
