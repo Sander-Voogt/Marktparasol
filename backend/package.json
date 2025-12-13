@@ -18,8 +18,8 @@
     "ib": "init-backend",
     "start": "init-backend && cd .medusa/server && medusa start --verbose",
     "dev": "medusa develop",
-    "postinstall": "patch-package --patch-dir ./patches",
-    "prebuild": "patch-package --patch-dir ./patches",
+    "postinstall": "patch-package --patch-dir /app/patches",
+    "prebuild": "patch-package --patch-dir /app/patches",
     "email:dev": "email dev --dir=./src/modules/email-notifications/templates --port=3002"
   },
   "dependencies": {
