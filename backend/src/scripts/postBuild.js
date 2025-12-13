@@ -30,3 +30,10 @@ execSync('pnpm i --prod --frozen-lockfile', {
   cwd: MEDUSA_SERVER_PATH,
   stdio: 'inherit'
 });
+
+// Apply patch-package
+console.log('Applying patches in .medusa/server...');
+execSync('npx patch-package --no-verify', {
+  cwd: MEDUSA_SERVER_PATH,
+  stdio: 'inherit'
+});
