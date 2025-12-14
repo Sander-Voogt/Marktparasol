@@ -1,8 +1,8 @@
 diff --git a/node_modules/@medusajs/file-s3/dist/services/s3-file.js b/node_modules/@medusajs/file-s3/dist/services/s3-file.js
-index 1fe6300..a9c3566 100644
+index 1fe6300..0cb9044 100644
 --- a/node_modules/@medusajs/file-s3/dist/services/s3-file.js
 +++ b/node_modules/@medusajs/file-s3/dist/services/s3-file.js
-@@ -60,20 +60,9 @@ class S3FileService extends utils_1.AbstractFileProviderService {
+@@ -60,20 +60,29 @@ class S3FileService extends utils_1.AbstractFileProviderService {
          const parsedFilename = path_1.default.parse(file.filename);
          // TODO: Allow passing a full path for storage per request, not as a global config.
          const fileKey = `${this.config_.prefix}${parsedFilename.name}-${(0, ulid_1.ulid)()}${parsedFilename.ext}`;
@@ -20,7 +20,27 @@ index 1fe6300..a9c3566 100644
 -            // Last-resort fallback: binary
 -            content = Buffer.from(file.content, "binary");
 -        }
-+        const content = Buffer.from(file.content, "binary")
++let content
++
++if (Buffer.isBuffer(file.content)) {
++  content = file.content
++} else {
++  try {
++    const decoded = Buffer.from(file.content, "base64")
++    if (decoded.toString("base64") === file.content) {
++      content = decoded
++    } else if (
++      file.mimeType?.startsWith("text/") ||
++      file.mimeType?.includes("csv")
++    ) {
++      content = Buffer.from(file.content, "utf8")
++    } else {
++      content = Buffer.from(file.content, "binary")
++    }
++  } catch {
++    content = Buffer.from(file.content, "binary")
++  }
++}
 +
 +
          const command = new client_s3_1.PutObjectCommand({
