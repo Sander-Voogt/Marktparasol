@@ -1,22 +1,14 @@
 diff --git a/node_modules/@medusajs/file-s3/dist/services/s3-file.js b/node_modules/@medusajs/file-s3/dist/services/s3-file.js
-index 1fe6300..94eaf05 100644
+index 1fe6300..cf6d512 100644
 --- a/node_modules/@medusajs/file-s3/dist/services/s3-file.js
 +++ b/node_modules/@medusajs/file-s3/dist/services/s3-file.js
-@@ -51,58 +51,68 @@ class S3FileService extends utils_1.AbstractFileProviderService {
-         return new client_s3_1.S3Client(config);
-     }
-     async upload(file) {
--        if (!file) {
--            throw new utils_1.MedusaError(utils_1.MedusaError.Types.INVALID_DATA, `No file provided`);
--        }
--        if (!file.filename) {
--            throw new utils_1.MedusaError(utils_1.MedusaError.Types.INVALID_DATA, `No filename provided`);
--        }
--        const parsedFilename = path_1.default.parse(file.filename);
--        // TODO: Allow passing a full path for storage per request, not as a global config.
--        const fileKey = `${this.config_.prefix}${parsedFilename.name}-${(0, ulid_1.ulid)()}${parsedFilename.ext}`;
--        let content;
--        try {
+@@ -61,18 +61,31 @@ class S3FileService extends utils_1.AbstractFileProviderService {
+         // TODO: Allow passing a full path for storage per request, not as a global config.
+         const fileKey = `${this.config_.prefix}${parsedFilename.name}-${(0, ulid_1.ulid)()}${parsedFilename.ext}`;
+         let content;
++
++        // First, try base64 (for files explicitly base64-encoded)
+         try {
 -            const decoded = Buffer.from(file.content, "base64");
 -            if (decoded.toString("base64") === file.content) {
 -                content = decoded;
@@ -24,102 +16,31 @@ index 1fe6300..94eaf05 100644
 -            else {
 -                content = Buffer.from(file.content, "utf8");
 -            }
--        }
++        const decoded = Buffer.from(file.content, "base64")
++        if (decoded.toString("base64") === file.content) {
++            content = decoded
++            return // Base64 detected, use it
++        }
++        } catch {
++        // Not base64, continue to other encodings
+         }
 -        catch {
 -            // Last-resort fallback: binary
 -            content = Buffer.from(file.content, "binary");
--        }
--        const command = new client_s3_1.PutObjectCommand({
--            // We probably also want to support a separate bucket altogether for private files
--            // protected private_bucket_: string
--            // protected private_access_key_id_: string
--            // protected private_secret_access_key_: string
--            ACL: file.access === "public" ? "public-read" : "private",
--            Bucket: this.config_.bucket,
--            Body: content,
--            Key: fileKey,
--            ContentType: file.mimeType,
--            CacheControl: this.config_.cacheControl,
--            // Note: We could potentially set the content disposition when uploading,
--            // but storing the original filename as metadata should suffice.
--            Metadata: {
--                "original-filename": encodeURIComponent(file.filename),
--            },
--        });
--        try {
--            await this.client_.send(command);
--        }
--        catch (e) {
--            this.logger_.error(e);
--            throw e;
--        }
--        return {
--            url: `${this.config_.fileUrl}/${encodeURIComponent(fileKey)}`,
--            key: fileKey,
--        };
--    }
-+  if (!file) {
-+    throw new MedusaError(
-+      MedusaError.Types.INVALID_DATA,
-+      "No file provided"
-+    )
-+  }
 +
-+  if (!file.filename) {
-+    throw new MedusaError(
-+      MedusaError.Types.INVALID_DATA,
-+      "No filename provided"
-+    )
-+  }
++        // Detect if content is text (CSV) or binary (images)
++        // Use MIME type as the discriminator
++        const isTextFile = file.mimeType?.startsWith("text/") ||
++                        file.mimeType?.includes("csv") ||
++                        file.mimeType?.includes("json") ||
++                        file.mimeType?.includes("xml")
 +
-+  const parsedFilename = path.parse(file.filename)
-+  const fileKey = `${this.config_.prefix}${parsedFilename.name}-${ulid()}${parsedFilename.ext}`
-+
-+  let content;
-+
-+if (Buffer.isBuffer(file.content)) {
-+  content = file.content;
-+}
-+
-+// fallback: strings (CSV etc.)
-+else {
-+  const isText =
-+    file.mimeType?.startsWith("text/") ||
-+    file.mimeType?.includes("csv") ||
-+    file.mimeType?.includes("json") ||
-+    file.mimeType?.includes("xml");
-+
-+  content = isText
-+    ? Buffer.from(file.content, "utf8")
-+    : Buffer.from(file.content, "binary");
-+}
-+
-+
-+  const command = new PutObjectCommand({
-+    ACL: file.access === "public" ? "public-read" : "private",
-+    Bucket: this.config_.bucket,
-+    Body: content,
-+    Key: fileKey,
-+    ContentType: file.mimeType,
-+    CacheControl: this.config_.cacheControl,
-+    Metadata: {
-+      "original-filename": encodeURIComponent(file.filename),
-+    },
-+  })
-+
-+  try {
-+    await this.client_.send(command)
-+  } catch (e) {
-+    this.logger_.error(e)
-+    throw e
-+  }
-+
-+  return {
-+    url: `${this.config_.fileUrl}/${encodeURIComponent(fileKey)}`,
-+    key: fileKey,
-+  }
-+}
-+
-     async delete(files) {
-         try {
-             /**
++        if (isTextFile) {
++        // For text/CSV files, use UTF-8 (fixes special characters from #13649)
++        content = Buffer.from(file.content, "utf8")
++        } else {
++        // For binary files (images, PDFs, etc.), use binary encoding
++        content = Buffer.from(file.content, "binary")
+         }
+         const command = new client_s3_1.PutObjectCommand({
+             // We probably also want to support a separate bucket altogether for private files
