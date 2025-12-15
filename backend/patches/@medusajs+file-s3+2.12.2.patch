@@ -1,13 +1,14 @@
 diff --git a/node_modules/@medusajs/file-s3/dist/services/s3-file.js b/node_modules/@medusajs/file-s3/dist/services/s3-file.js
-index 1fe6300..7174984 100644
+index 1fe6300..b257969 100644
 --- a/node_modules/@medusajs/file-s3/dist/services/s3-file.js
 +++ b/node_modules/@medusajs/file-s3/dist/services/s3-file.js
-@@ -60,20 +60,9 @@ class S3FileService extends utils_1.AbstractFileProviderService {
-         const parsedFilename = path_1.default.parse(file.filename);
+@@ -61,19 +61,33 @@ class S3FileService extends utils_1.AbstractFileProviderService {
          // TODO: Allow passing a full path for storage per request, not as a global config.
          const fileKey = `${this.config_.prefix}${parsedFilename.name}-${(0, ulid_1.ulid)()}${parsedFilename.ext}`;
--        let content;
--        try {
+         let content;
++
++        // First, try base64 (for files explicitly base64-encoded)
+         try {
 -            const decoded = Buffer.from(file.content, "base64");
 -            if (decoded.toString("base64") === file.content) {
 -                content = decoded;
@@ -15,14 +16,33 @@ index 1fe6300..7174984 100644
 -            else {
 -                content = Buffer.from(file.content, "utf8");
 -            }
--        }
++        const decoded = Buffer.from(file.content, "base64")
++        if (decoded.toString("base64") === file.content) {
++            content = decoded
++            return // Base64 detected, use it
++        }
++        } catch {
++        // Not base64, continue to other encodings
+         }
 -        catch {
 -            // Last-resort fallback: binary
 -            content = Buffer.from(file.content, "binary");
--        }
-+        const content = Buffer.isBuffer(file.content)
-+  ? file.content
-+  : Buffer.from(file.content, "binary")
++
++        // Detect if content is text (CSV) or binary (images)
++        // Use MIME type as the discriminator
++        const isTextFile = file.mimeType?.startsWith("text/") ||
++                        file.mimeType?.includes("csv") ||
++                        file.mimeType?.includes("json") ||
++                        file.mimeType?.includes("xml")
++
++        if (isTextFile) {
++        // For text/CSV files, use UTF-8 (fixes special characters from #13649)
++        content = Buffer.from(file.content, "utf8")
++        } else {
++        // For binary files (images, PDFs, etc.), use binary encoding
++        content = Buffer.from(file.content, "binary")
+         }
++        
          const command = new client_s3_1.PutObjectCommand({
              // We probably also want to support a separate bucket altogether for private files
              // protected private_bucket_: string
