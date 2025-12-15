@@ -1,11 +1,20 @@
 diff --git a/node_modules/@medusajs/file-s3/dist/services/s3-file.js b/node_modules/@medusajs/file-s3/dist/services/s3-file.js
-index 1fe6300..a9c3566 100644
+index 1fe6300..94eaf05 100644
 --- a/node_modules/@medusajs/file-s3/dist/services/s3-file.js
 +++ b/node_modules/@medusajs/file-s3/dist/services/s3-file.js
-@@ -60,20 +60,9 @@ class S3FileService extends utils_1.AbstractFileProviderService {
-         const parsedFilename = path_1.default.parse(file.filename);
-         // TODO: Allow passing a full path for storage per request, not as a global config.
-         const fileKey = `${this.config_.prefix}${parsedFilename.name}-${(0, ulid_1.ulid)()}${parsedFilename.ext}`;
+@@ -51,58 +51,68 @@ class S3FileService extends utils_1.AbstractFileProviderService {
+         return new client_s3_1.S3Client(config);
+     }
+     async upload(file) {
+-        if (!file) {
+-            throw new utils_1.MedusaError(utils_1.MedusaError.Types.INVALID_DATA, `No file provided`);
+-        }
+-        if (!file.filename) {
+-            throw new utils_1.MedusaError(utils_1.MedusaError.Types.INVALID_DATA, `No filename provided`);
+-        }
+-        const parsedFilename = path_1.default.parse(file.filename);
+-        // TODO: Allow passing a full path for storage per request, not as a global config.
+-        const fileKey = `${this.config_.prefix}${parsedFilename.name}-${(0, ulid_1.ulid)()}${parsedFilename.ext}`;
 -        let content;
 -        try {
 -            const decoded = Buffer.from(file.content, "base64");
@@ -20,9 +29,97 @@ index 1fe6300..a9c3566 100644
 -            // Last-resort fallback: binary
 -            content = Buffer.from(file.content, "binary");
 -        }
-+        const content = Buffer.from(file.content, "binary")
+-        const command = new client_s3_1.PutObjectCommand({
+-            // We probably also want to support a separate bucket altogether for private files
+-            // protected private_bucket_: string
+-            // protected private_access_key_id_: string
+-            // protected private_secret_access_key_: string
+-            ACL: file.access === "public" ? "public-read" : "private",
+-            Bucket: this.config_.bucket,
+-            Body: content,
+-            Key: fileKey,
+-            ContentType: file.mimeType,
+-            CacheControl: this.config_.cacheControl,
+-            // Note: We could potentially set the content disposition when uploading,
+-            // but storing the original filename as metadata should suffice.
+-            Metadata: {
+-                "original-filename": encodeURIComponent(file.filename),
+-            },
+-        });
+-        try {
+-            await this.client_.send(command);
+-        }
+-        catch (e) {
+-            this.logger_.error(e);
+-            throw e;
+-        }
+-        return {
+-            url: `${this.config_.fileUrl}/${encodeURIComponent(fileKey)}`,
+-            key: fileKey,
+-        };
+-    }
++  if (!file) {
++    throw new MedusaError(
++      MedusaError.Types.INVALID_DATA,
++      "No file provided"
++    )
++  }
++
++  if (!file.filename) {
++    throw new MedusaError(
++      MedusaError.Types.INVALID_DATA,
++      "No filename provided"
++    )
++  }
++
++  const parsedFilename = path.parse(file.filename)
++  const fileKey = `${this.config_.prefix}${parsedFilename.name}-${ulid()}${parsedFilename.ext}`
++
++  let content;
++
++if (Buffer.isBuffer(file.content)) {
++  content = file.content;
++}
++
++// fallback: strings (CSV etc.)
++else {
++  const isText =
++    file.mimeType?.startsWith("text/") ||
++    file.mimeType?.includes("csv") ||
++    file.mimeType?.includes("json") ||
++    file.mimeType?.includes("xml");
++
++  content = isText
++    ? Buffer.from(file.content, "utf8")
++    : Buffer.from(file.content, "binary");
++}
 +
 +
-         const command = new client_s3_1.PutObjectCommand({
-             // We probably also want to support a separate bucket altogether for private files
-             // protected private_bucket_: string
++  const command = new PutObjectCommand({
++    ACL: file.access === "public" ? "public-read" : "private",
++    Bucket: this.config_.bucket,
++    Body: content,
++    Key: fileKey,
++    ContentType: file.mimeType,
++    CacheControl: this.config_.cacheControl,
++    Metadata: {
++      "original-filename": encodeURIComponent(file.filename),
++    },
++  })
++
++  try {
++    await this.client_.send(command)
++  } catch (e) {
++    this.logger_.error(e)
++    throw e
++  }
++
++  return {
++    url: `${this.config_.fileUrl}/${encodeURIComponent(fileKey)}`,
++    key: fileKey,
++  }
++}
++
+     async delete(files) {
+         try {
+             /**
