@@ -68,19 +68,19 @@ const Register = ({ setCurrentView }: Props) => {
         </div>
         <ErrorMessage error={message} data-testid="register-error" />
         <span className="text-center text-ui-fg-base text-small-regular mt-6">
-          By creating an account, you agree to Markt-Parasol.nl&apos;s{" "}
+          Door een account aan te maken, gaat u akkoord met de ActieParasol.nl&apos;s{" "}
           <LocalizedClientLink
             href="/content/privacy-policy"
             className="underline"
           >
             Privacy Policy
           </LocalizedClientLink>{" "}
-          and{" "}
+          &{" "}
           <LocalizedClientLink
             href="/content/terms-of-use"
             className="underline"
           >
-            Terms of Use
+            Algemene Voorwaarden
           </LocalizedClientLink>
           .
         </span>
@@ -89,12 +89,12 @@ const Register = ({ setCurrentView }: Props) => {
         </SubmitButton>
       </form>
       <span className="text-center text-ui-fg-base text-small-regular mt-6">
-        Already a member?{" "}
+        Bent u al geregistreerd?{" "}
         <button
           onClick={() => setCurrentView(LOGIN_VIEW.SIGN_IN)}
           className="underline"
         >
-          Sign in
+          Inloggen
         </button>
         .
       </span>

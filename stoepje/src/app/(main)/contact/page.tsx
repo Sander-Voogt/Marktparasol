@@ -18,7 +18,7 @@ export default function contact() {
           </li>
           <li>
             Email:{" "}
-            <a href="mailto:info@markt-parasol.nl">info@markt-parasol.nl</a>
+            <a href="mailto:stoepje@actieparasol.nl">stoepje@actieparasol.nl</a>
           </li>
           <li>Prins der Nederlandenstraat 15</li>
           <li>3151SB Hoek van Holland</li>

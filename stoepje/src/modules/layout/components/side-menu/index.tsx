@@ -11,7 +11,8 @@ import { HttpTypes } from "@medusajs/types"
 
 const SideMenuItems = {
   Home: "/",
-  Parasols: "/collections/markt-parasols",
+  Parasols: "/collections/stoepje-parasols",
+  "Alle Producten": "/store",
   Zoeken: "/search",
   Offerte: "/offerte-aanvragen",
   Account: "/account",
@@ -81,7 +82,7 @@ const SideMenu = ({ regions }: { regions: HttpTypes.StoreRegion[] | null }) => {
                     </ul>
                     <div className="flex flex-col gap-y-6">
                       <Text className="flex justify-between txt-compact-small">
-                        © {new Date().getFullYear()} Markt-Parasol.nl. All
+                        © {new Date().getFullYear()} Actieparasol.nl. All
                         rights reserved.
                       </Text>
                     </div>

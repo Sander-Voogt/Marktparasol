@@ -11,8 +11,8 @@ import { listRegions } from "@lib/data/regions"
 import { getCustomer } from "@lib/data/customer"
 
 export const metadata: Metadata = {
-  title: "Profile",
-  description: "View and edit your Markt-Parasol.nl profile.",
+  title: "Profiel",
+  description: "Bekijken en bewerken van uw profielgegevens",
 }
 
 export default async function Profile() {

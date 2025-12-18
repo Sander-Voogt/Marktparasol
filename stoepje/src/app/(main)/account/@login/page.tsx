@@ -3,8 +3,8 @@ import { Metadata } from "next"
 import LoginTemplate from "@modules/account/templates/login-template"
 
 export const metadata: Metadata = {
-  title: "Sign in",
-  description: "Sign in to your Markt-Parasol.nl account.",
+  title: "Inloggen",
+  description: "Log in op uw account.",
 }
 
 export default function Login() {
