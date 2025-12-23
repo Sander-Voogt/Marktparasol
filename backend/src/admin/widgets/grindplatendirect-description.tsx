@@ -81,12 +81,15 @@ const MainDescriptionForm = ({ productCategoryId, metadata }: Props) => {
         <FocusModal.Content>
           <FocusModal.Header>
             <FocusModal.Title>Edit Description</FocusModal.Title>
+            <Button type="submit" className="mt-4" form="form">
+                    Save
+                  </Button>
           </FocusModal.Header>
 
           <FocusModal.Body className="flex flex-col items-center py-4 max-h-[70vh] overflow-y-auto">
             <div className="flex w-full max-w-lg flex-col gap-y-8">
               <FormProvider<CustomFields> {...form}>
-                <form onSubmit={form.handleSubmit(onSubmit)}>
+                <form onSubmit={form.handleSubmit(onSubmit)} id="form">
                   <Label>Main description</Label>
                   <TiptapEditor
                     value={form.watch("grinddirect_desc.json") || ""}
@@ -98,9 +101,7 @@ const MainDescriptionForm = ({ productCategoryId, metadata }: Props) => {
                       })
                     }
                   />
-                  <Button type="submit" className="mt-4">
-                    Save
-                  </Button>
+                  
                 </form>
               </FormProvider>
             </div>
