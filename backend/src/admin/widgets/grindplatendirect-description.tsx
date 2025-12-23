@@ -1,5 +1,8 @@
 // MainDescriptionWrapper.tsx
-import { DetailWidgetProps, AdminProductCategory } from "@medusajs/framework/types";
+import {
+  DetailWidgetProps,
+  AdminProductCategory,
+} from "@medusajs/framework/types";
 import { useQuery } from "@tanstack/react-query";
 // MainDescriptionForm.tsx
 import { Button, Container, FocusModal, Heading, Label } from "@medusajs/ui";
@@ -29,8 +32,10 @@ const GrindPlatenDirectDescription = ({
 
 type CustomFields = {
   actieparasoldescription: string;
-    grinddirect_desc: string;
-  grinddirect_desc_html: string;
+  grinddirect_desc: {
+    json: string;
+    html: string;
+  };
 };
 
 type Props = {
@@ -41,7 +46,7 @@ type Props = {
 const MainDescriptionForm = ({ productCategoryId, metadata }: Props) => {
   const form = useForm<CustomFields>({
     defaultValues: {
-      actieparasoldescription: metadata.actieparasoldescription || ""
+      actieparasoldescription: metadata.actieparasoldescription || "",
     },
   });
 
@@ -60,7 +65,8 @@ const MainDescriptionForm = ({ productCategoryId, metadata }: Props) => {
     },
   });
 
-  const onSubmit: SubmitHandler<CustomFields> = (data) => updateMutation.mutate(data);
+  const onSubmit: SubmitHandler<CustomFields> = (data) =>
+    updateMutation.mutate(data);
 
   return (
     <Container className="divide-y p-0">
@@ -81,15 +87,20 @@ const MainDescriptionForm = ({ productCategoryId, metadata }: Props) => {
             <div className="flex w-full max-w-lg flex-col gap-y-8">
               <FormProvider<CustomFields> {...form}>
                 <form onSubmit={form.handleSubmit(onSubmit)}>
-                <Label>Main description</Label>
-                 <TiptapEditor
-                        value={form.watch("grinddirect_desc") || ""}
-                        onChange={(json, html) => {
-                          form.setValue("grinddirect_desc", json);
-                          form.setValue("grinddirect_desc_html", html);
-                        }}
-                      />
-                  <Button type="submit" className="mt-4">Save</Button>
+                  <Label>Main description</Label>
+                  <TiptapEditor
+                    value={form.watch("grinddirect_desc.json") || ""}
+                    onChange={(json, html) =>
+                      //@ts-ignore
+                      form.setValue("grinddirect_desc", {
+                        json: json,
+                        html: html,
+                      })
+                    }
+                  />
+                  <Button type="submit" className="mt-4">
+                    Save
+                  </Button>
                 </form>
               </FormProvider>
             </div>
