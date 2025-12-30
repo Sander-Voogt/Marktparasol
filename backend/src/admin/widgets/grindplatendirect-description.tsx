@@ -47,6 +47,7 @@ const MainDescriptionForm = ({ productCategoryId, metadata }: Props) => {
   const form = useForm<CustomFields>({
     defaultValues: {
       actieparasoldescription: metadata.actieparasoldescription || "",
+      grinddirect_desc: metadata.grinddirect_desc || { json: "", html: "" },
     },
   });
 
