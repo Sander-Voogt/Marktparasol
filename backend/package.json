@@ -48,6 +48,7 @@
     "@tiptap/extension-table-row": "^3.13.0",
     "@tiptap/react": "^3.13.0",
     "@tiptap/starter-kit": "^3.13.0",
+    "@variablevic/mollie-payments-medusa": "^0.0.13",
     "medusajs-launch-utils": "0.0.18",
     "minio": "^8.0.6",
     "patch-package": "^8.0.1",
