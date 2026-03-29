@@ -59,6 +59,7 @@ export default function PaymentReturnPage() {
           setMessage("Er ging iets mis met de betaling. Je wordt terug naar de winkelwagen gestuurd.")
           setTimeout(() => router.push("/checkout?error=payment_issue&step=review"), 4000)
         }
+        
 
         // Nog niet klaar → volgende poging
         if (attempts++ < maxAttempts) {
