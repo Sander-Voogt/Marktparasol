@@ -1,0 +1,71 @@
+/* Embla Carousel Base Styles */
+.embla {
+  --slide-height: 19rem;
+  --slide-spacing: 1rem;
+  --slide-size: 100%;
+}
+
+.embla__viewport {
+  overflow: hidden;
+}
+
+.embla__container {
+  backface-visibility: hidden;
+  display: flex;
+  touch-action: pan-y pinch-zoom;
+  margin-left: calc(var(--slide-spacing) * -1);
+}
+
+.embla__slide {
+  flex: 0 0 var(--slide-size);
+  min-width: 0;
+  padding-left: var(--slide-spacing);
+}
+
+/* Thumbnails */
+.embla-thumbs {
+  --thumbs-slide-spacing: 0.75rem;
+  --thumbs-slide-height: 5rem;
+  margin-top: var(--thumbs-slide-spacing);
+}
+
+.embla-thumbs__viewport {
+  overflow: hidden;
+}
+
+.embla-thumbs__container {
+  display: flex;
+  flex-direction: row;
+  margin-left: calc(var(--thumbs-slide-spacing) * -1);
+}
+
+.embla-thumbs__slide {
+  flex: 0 0 28%;
+  min-width: 0;
+  padding-left: var(--thumbs-slide-spacing);
+  position: relative;
+}
+
+@media (min-width: 576px) {
+  .embla-thumbs__slide {
+    flex: 0 0 18%;
+  }
+}
+
+/* Custom scrollbar for thumbnails container (optional) */
+.embla-thumbs__viewport::-webkit-scrollbar {
+  height: 4px;
+}
+
+.embla-thumbs__viewport::-webkit-scrollbar-track {
+  background: #f1f1f1;
+}
+
+.embla-thumbs__viewport::-webkit-scrollbar-thumb {
+  background: #888;
+  border-radius: 2px;
+}
+
+.embla-thumbs__viewport::-webkit-scrollbar-thumb:hover {
+  background: #555;
+}
