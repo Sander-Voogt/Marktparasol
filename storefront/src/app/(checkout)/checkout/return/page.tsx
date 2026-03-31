@@ -44,9 +44,9 @@ export default function Page({ searchParams }: { searchParams: { cart_id?: strin
             }
           } catch (err) {
             console.error("Error placing order:", err)
-            setStatus("failed")
-            setMessage("Er ging iets mis bij het plaatsen van de bestelling. Probeer het opnieuw.")
-            setTimeout(() => router.push("/checkout?error=order_issue"), 4000)
+            // setStatus("failed")
+            // setMessage("Er ging iets mis bij het plaatsen van de bestelling. Probeer het opnieuw.")
+            // setTimeout(() => router.push("/checkout?error=order_issue"), 4000)
           }
           return
         }
