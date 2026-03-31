@@ -63,7 +63,7 @@ export default function Page({ searchParams }: { searchParams: { cart_id?: strin
           setTimeout(poll, intervalMs)
         } else {
           setStatus("timeout")
-          setMessage("Het duurt langer dan verwacht. Controleer je order status later in je account.")
+          setMessage("Het duurt langer dan verwacht. De betaling is nog niet door ontvangen. Klik op onderstaande button om de betaling opnieuw uit te voeren.")
         }
       } catch (err) {
         console.error(err)
@@ -81,6 +81,10 @@ export default function Page({ searchParams }: { searchParams: { cart_id?: strin
       <div className="text-center p-8 max-w-md">
         {status === "checking" && (
           <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-blue-500 mx-auto mb-6"></div>
+        )}
+
+        {status === 'timeout' && (
+          <a href="/checkout?step=review">Naar winkelwagen</a>
         )}
         <h1 className="text-2xl font-bold mb-4">
           {status === "success" ? "Gelukt!" : status === "failed" || status === "timeout" ? "Oeps..." : "Even geduld..."}
