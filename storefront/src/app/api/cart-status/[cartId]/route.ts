@@ -4,8 +4,8 @@ export async function GET(
   req: Request,
   { params }: { params: { cartId: string } }
 ) {
+  const { cartId } = params; // geen await
 
-    const {cartId} = await params;
   try {
     const res = await fetch(
       `${process.env.MEDUSA_BACKEND_URL}/store/carts/${cartId}`,
@@ -14,12 +14,22 @@ export async function GET(
           "x-publishable-api-key": process.env.NEXT_PUBLIC_MEDUSA_PUBLISHABLE_KEY!,
         },
       }
-    )
+    );
 
-    const data = await res.json()
+    if (!res.ok) {
+      return NextResponse.json(
+        { error: "Failed to retrieve cart", status: res.status },
+        { status: res.status }
+      );
+    }
 
-    return NextResponse.json(data)
+    const data = await res.json();
+    return NextResponse.json(data);
+
   } catch (err) {
-    return NextResponse.json({ error: "Failed to retrieve cart", err: err }, { status: 500 })
+    return NextResponse.json(
+      { error: "Failed to retrieve cart", details: err },
+      { status: 500 }
+    );
   }
 }
