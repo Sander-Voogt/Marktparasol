@@ -1,4 +1,3 @@
-// app/checkout/return/page.tsx  (of pages/checkout/return.tsx)
 "use client"
 
 import { useRouter, useSearchParams } from "next/navigation"
@@ -8,20 +7,15 @@ import { placeOrder } from "@lib/data/cart"
 import { getCartId } from "@lib/data/cookies"
 
 export default function Page({ searchParams }: { searchParams: { cart_id?: string, payment_intent?: string } }) {
-
-  
-    const router = useRouter()
-
-  const paymentIntent = searchParams.payment_intent// optioneel, als je dit meestuurt
+  const router = useRouter()
+  const paymentIntent = searchParams.payment_intent // optional, as passed
 
   const [status, setStatus] = useState<"checking" | "success" | "failed" | "timeout">("checking")
   const [message, setMessage] = useState("We controleren je betaling... even geduld aub.")
 
   useEffect(() => {
-    
-
     let attempts = 0
-    const maxAttempts = 15 // ~30 seconden
+    const maxAttempts = 15 // ~30 seconds
     const intervalMs = 2000
 
     const poll = async () => {
@@ -29,7 +23,7 @@ export default function Page({ searchParams }: { searchParams: { cart_id?: strin
         const res = await fetch(`/api/cart-status/`)
         const { cart } = await res.json()
 
-        // Check of payment session authorized/captured is
+        // Check if payment session is authorized/captured
         const paymentSession = ["authorized", "captured", "completed"].includes(cart.payment_collection.status)
         const paymentSession2 = cart.payment_collection.status
         console.log('paymentsession', paymentSession, paymentSession2)
@@ -37,33 +31,39 @@ export default function Page({ searchParams }: { searchParams: { cart_id?: strin
         if (paymentSession) {
           setStatus("success")
           setMessage("Betaling succesvol! Je wordt doorgestuurd...")
-          
-          // Optioneel: complete cart als dat nog niet gebeurd is (soms nodig bij manual capture)
-          // await medusaClient.carts.complete(cartId)
+
+          // Ensure placeOrder is successfully called before redirecting
+          try {
             const order = await placeOrder()
-          
-          setTimeout(() => {
-            router.push(`/order/${order.id}/confirmed`)
-          }, 1500)
+            if (order?.id) {
+              setTimeout(() => {
+                router.push(`/order/confirmed/${order.id}`)
+              }, 1500)
+            } else {
+              throw new Error("Order ID is missing")
+            }
+          } catch (err) {
+            console.error("Error placing order:", err)
+            setStatus("failed")
+            setMessage("Er ging iets mis bij het plaatsen van de bestelling. Probeer het opnieuw.")
+            setTimeout(() => router.push("/checkout?error=order_issue"), 4000)
+          }
           return
         }
 
-        // Gefaald?
-
+        // Handle payment failure
         if (["error", "canceled", "requires_payment_method"].includes(cart.payment_collection.status)) {
           setStatus("failed")
           setMessage("Er ging iets mis met de betaling. Je wordt terug naar de winkelwagen gestuurd.")
           setTimeout(() => router.push("/checkout?error=payment_issue&step=review"), 4000)
         }
 
-
-        // Nog niet klaar → volgende poging
+        // If not completed yet → retry
         if (attempts++ < maxAttempts) {
           setTimeout(poll, intervalMs)
         } else {
           setStatus("timeout")
           setMessage("Het duurt langer dan verwacht. Controleer je order status later in je account.")
-          // setTimeout(() => router.push("/account/orders"), 5000)
         }
       } catch (err) {
         console.error(err)
