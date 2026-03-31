@@ -1,0 +1,20 @@
+<svg width="200" height="200" viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg">
+  <!-- Red Background -->
+  <rect width="200" height="200" fill="#D32F2F"/>
+  
+  <!-- Gold Crest Frame -->
+  <g transform="translate(100, 100)">
+    <!-- Ornamental Border -->
+    <circle cx="0" cy="0" r="70" fill="none" stroke="#D4AF37" stroke-width="3"/>
+    <circle cx="0" cy="0" r="65" fill="none" stroke="#D4AF37" stroke-width="1"/>
+    
+    <!-- Center Shield -->
+    <path d="M -30,-30 L 30,-30 L 30,20 L 0,40 L -30,20 Z" fill="#D4AF37" opacity="0.3"/>
+    
+    <!-- Letter R -->
+    <text x="0" y="15" font-family="serif" font-size="48" font-weight="bold" fill="#FFFFFF" text-anchor="middle">R</text>
+  </g>
+  
+  <!-- Brand Name -->
+  <text x="100" y="180" font-family="sans-serif" font-size="20" font-weight="bold" fill="#FFFFFF" text-anchor="middle" letter-spacing="2">RIC HOLLAND</text>
+</svg>

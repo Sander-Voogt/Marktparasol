@@ -6,12 +6,11 @@ import { useEffect, useState } from "react"
 import { sdk } from "@lib/config"
 import { placeOrder } from "@lib/data/cart"
 
-export default function PaymentReturnPage() {
-  const router = useRouter()
-  const searchParams = useSearchParams()
+export default function Page({ searchParams }: { searchParams: { cart_id?: string, payment_intent?: string } }) {
+  const cartId = searchParams.cart_id
+    const router = useRouter()
 
-  const cartId = searchParams.get("cart_id")
-  const paymentIntent = searchParams.get("payment_intent") // optioneel, als je dit meestuurt
+  const paymentIntent = searchParams.payment_intent// optioneel, als je dit meestuurt
 
   const [status, setStatus] = useState<"checking" | "success" | "failed" | "timeout">("checking")
   const [message, setMessage] = useState("We controleren je betaling... even geduld aub.")
@@ -59,7 +58,7 @@ export default function PaymentReturnPage() {
           setMessage("Er ging iets mis met de betaling. Je wordt terug naar de winkelwagen gestuurd.")
           setTimeout(() => router.push("/checkout?error=payment_issue&step=review"), 4000)
         }
-        
+
 
         // Nog niet klaar → volgende poging
         if (attempts++ < maxAttempts) {
