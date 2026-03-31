@@ -5,7 +5,7 @@ settings:
   excludeLinksFromLockfile: false
 
 overrides:
-  webpack: ^5
+  webpack: '5'
   glob@>=10.2.0 <10.5.0: '>=10.5.0'
   '@babel/runtime@<7.26.10': '>=7.26.10'
   '@babel/helpers@<7.26.10': '>=7.26.10'
@@ -19,10 +19,10 @@ importers:
   .:
     dependencies:
       '@headlessui/react':
-        specifier: ^1.7.19
+        specifier: 1.7.19
         version: 1.7.19(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
       '@hookform/error-message':
-        specifier: ^2.0.1
+        specifier: 2.0.1
         version: 2.0.1(react-dom@18.3.1(react@18.3.1))(react-hook-form@7.54.2(react@18.3.1))(react@18.3.1)
       '@medusajs/js-sdk':
         specifier: preview
@@ -34,43 +34,43 @@ importers:
         specifier: preview
         version: 4.1.6-preview-20260331062322(@types/react-dom@18.3.7(@types/react@18.3.28))(@types/react@18.3.28)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)(typescript@5.9.3)
       '@meilisearch/instant-meilisearch':
-        specifier: ^0.7.1
+        specifier: 0.7.1
         version: 0.7.1
       '@next/third-parties':
-        specifier: ^15.5.14
+        specifier: 15.5.14
         version: 15.5.14(next@15.3.8(@babel/core@7.29.0)(@playwright/test@1.58.2)(react-dom@18.3.1(react@18.3.1))(react@18.3.1))(react@18.3.1)
       '@paypal/paypal-js':
-        specifier: ^5.1.6
+        specifier: 5.1.6
         version: 5.1.6
       '@paypal/react-paypal-js':
-        specifier: ^7.8.3
+        specifier: 7.8.3
         version: 7.8.3(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
       '@stripe/react-stripe-js':
-        specifier: ^1.16.5
+        specifier: 1.16.5
         version: 1.16.5(@stripe/stripe-js@1.54.2)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
       '@stripe/stripe-js':
-        specifier: ^1.54.2
+        specifier: 1.54.2
         version: 1.54.2
       '@tiptap/core':
-        specifier: ^3.21.0
+        specifier: 3.21.0
         version: 3.21.0(@tiptap/pm@3.21.0)
       '@tiptap/react':
-        specifier: ^3.21.0
+        specifier: 3.21.0
         version: 3.21.0(@floating-ui/dom@1.7.6)(@tiptap/core@3.21.0(@tiptap/pm@3.21.0))(@tiptap/pm@3.21.0)(@types/react-dom@18.3.7(@types/react@18.3.28))(@types/react@18.3.28)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
       '@tiptap/starter-kit':
-        specifier: ^3.21.0
+        specifier: 3.21.0
         version: 3.21.0
       algoliasearch:
-        specifier: ^4.27.0
+        specifier: 4.27.0
         version: 4.27.0
       axios:
-        specifier: ^1.14.0
+        specifier: 1.14.0
         version: 1.14.0
       embla-carousel-react:
-        specifier: ^8.6.0
+        specifier: 8.6.0
         version: 8.6.0(react@18.3.1)
       lodash:
-        specifier: ^4.17.23
+        specifier: 4.17.23
         version: 4.17.23
       medusajs-launch-utils:
         specifier: 0.0.18
@@ -79,41 +79,41 @@ importers:
         specifier: 15.3.8
         version: 15.3.8(@babel/core@7.29.0)(@playwright/test@1.58.2)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
       pg:
-        specifier: ^8.20.0
+        specifier: 8.20.0
         version: 8.20.0
       qs:
-        specifier: ^6.15.0
+        specifier: 6.15.0
         version: 6.15.0
       react:
-        specifier: ^18.3.1
+        specifier: 18.3.1
         version: 18.3.1
       react-country-flag:
-        specifier: ^3.1.0
+        specifier: 3.1.0
         version: 3.1.0(react@18.3.1)
       react-dom:
-        specifier: ^18.3.1
+        specifier: 18.3.1
         version: 18.3.1(react@18.3.1)
       react-instantsearch-hooks-web:
-        specifier: ^6.47.3
+        specifier: 6.47.3
         version: 6.47.3(algoliasearch@4.27.0)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
       react-intersection-observer:
-        specifier: ^9.16.0
+        specifier: 9.16.0
         version: 9.16.0(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
       react-slick:
-        specifier: ^0.31.0
+        specifier: 0.31.0
         version: 0.31.0(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
       server-only:
-        specifier: ^0.0.1
+        specifier: 0.0.1
         version: 0.0.1
       tailwindcss-radix:
-        specifier: ^2.9.0
+        specifier: 2.9.0
         version: 2.9.0
       webpack:
         specifier: ^5.105.4
         version: 5.105.4
     devDependencies:
       '@babel/core':
-        specifier: ^7.29.0
+        specifier: 7.29.0
         version: 7.29.0
       '@medusajs/client-types':
         specifier: preview
@@ -122,55 +122,55 @@ importers:
         specifier: preview
         version: 2.13.6-preview-20260331062322(tailwindcss@3.4.19(yaml@2.6.1))
       '@playwright/test':
-        specifier: ^1.58.2
+        specifier: 1.58.2
         version: 1.58.2
       '@types/lodash':
-        specifier: ^4.17.24
+        specifier: 4.17.24
         version: 4.17.24
       '@types/node':
         specifier: 17.0.21
         version: 17.0.21
       '@types/pg':
-        specifier: ^8.20.0
+        specifier: 8.20.0
         version: 8.20.0
       '@types/react':
-        specifier: ^18.3.28
+        specifier: 18.3.28
         version: 18.3.28
       '@types/react-dom':
-        specifier: ^18.3.7
+        specifier: 18.3.7
         version: 18.3.7(@types/react@18.3.28)
       '@types/react-instantsearch-dom':
-        specifier: ^6.12.9
+        specifier: 6.12.9
         version: 6.12.9
       '@types/react-slick':
-        specifier: ^0.23.13
+        specifier: 0.23.13
         version: 0.23.13
       ansi-colors:
-        specifier: ^4.1.3
+        specifier: 4.1.3
         version: 4.1.3
       autoprefixer:
-        specifier: ^10.4.27
+        specifier: 10.4.27
         version: 10.4.27(postcss@8.5.8)
       babel-loader:
-        specifier: ^8.4.1
+        specifier: 8.4.1
         version: 8.4.1(@babel/core@7.29.0)(webpack@5.105.4)
       eslint:
         specifier: 8.10.0
         version: 8.10.0
       eslint-config-next:
-        specifier: ^13.5.11
+        specifier: 13.5.11
         version: 13.5.11(eslint@8.10.0)(typescript@5.9.3)
       postcss:
-        specifier: ^8.5.8
+        specifier: 8.5.8
         version: 8.5.8
       prettier:
-        specifier: ^2.8.8
+        specifier: 2.8.8
         version: 2.8.8
       tailwindcss:
-        specifier: ^3.4.19
+        specifier: 3.4.19
         version: 3.4.19(yaml@2.6.1)
       typescript:
-        specifier: ^5.9.3
+        specifier: 5.9.3
         version: 5.9.3
 
 packages:
@@ -2550,7 +2550,7 @@ packages:
     engines: {node: '>= 8.9'}
     peerDependencies:
       '@babel/core': ^7.0.0
-      webpack: ^5
+      webpack: '5'
 
   balanced-match@4.0.4:
     resolution: {integrity: sha512-BLrgEcRTwX2o6gGxGOCNyMvGSp35YofuYzw9h1IMTRmKqttAZZVU67bdb9Pr2vUHA8+j3i2tJfjO6C6+4myGTA==}
@@ -4285,7 +4285,7 @@ packages:
       '@swc/core': '*'
       esbuild: '*'
       uglify-js: '*'
-      webpack: ^5
+      webpack: '5'
     peerDependenciesMeta:
       '@swc/core':
         optional: true
@@ -7792,7 +7792,7 @@ snapshots:
       eslint: 8.10.0
       eslint-import-resolver-node: 0.3.9
       eslint-import-resolver-typescript: 3.10.1(eslint-plugin-import@2.32.0(eslint@8.10.0))(eslint@8.10.0)
-      eslint-plugin-import: 2.32.0(@typescript-eslint/parser@6.21.0(eslint@8.10.0)(typescript@5.9.3))(eslint-import-resolver-typescript@3.10.1)(eslint@8.10.0)
+      eslint-plugin-import: 2.32.0(@typescript-eslint/parser@6.21.0(eslint@8.10.0)(typescript@5.9.3))(eslint-import-resolver-typescript@3.10.1(eslint-plugin-import@2.32.0(eslint@8.10.0))(eslint@8.10.0))(eslint@8.10.0)
       eslint-plugin-jsx-a11y: 6.10.2(eslint@8.10.0)
       eslint-plugin-react: 7.37.5(eslint@8.10.0)
       eslint-plugin-react-hooks: 5.0.0-canary-7118f5dd7-20230705(eslint@8.10.0)
@@ -7822,7 +7822,7 @@ snapshots:
       tinyglobby: 0.2.15
       unrs-resolver: 1.11.1
     optionalDependencies:
-      eslint-plugin-import: 2.32.0(@typescript-eslint/parser@6.21.0(eslint@8.10.0)(typescript@5.9.3))(eslint-import-resolver-typescript@3.10.1)(eslint@8.10.0)
+      eslint-plugin-import: 2.32.0(@typescript-eslint/parser@6.21.0(eslint@8.10.0)(typescript@5.9.3))(eslint-import-resolver-typescript@3.10.1(eslint-plugin-import@2.32.0(eslint@8.10.0))(eslint@8.10.0))(eslint@8.10.0)
     transitivePeerDependencies:
       - supports-color
 
@@ -7837,7 +7837,7 @@ snapshots:
     transitivePeerDependencies:
       - supports-color
 
-  eslint-plugin-import@2.32.0(@typescript-eslint/parser@6.21.0(eslint@8.10.0)(typescript@5.9.3))(eslint-import-resolver-typescript@3.10.1)(eslint@8.10.0):
+  eslint-plugin-import@2.32.0(@typescript-eslint/parser@6.21.0(eslint@8.10.0)(typescript@5.9.3))(eslint-import-resolver-typescript@3.10.1(eslint-plugin-import@2.32.0(eslint@8.10.0))(eslint@8.10.0))(eslint@8.10.0):
     dependencies:
       '@rtsao/scc': 1.1.0
       array-includes: 3.1.9
