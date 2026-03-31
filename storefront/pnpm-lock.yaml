@@ -109,7 +109,7 @@ importers:
         specifier: 2.9.0
         version: 2.9.0
       webpack:
-        specifier: ^5.105.4
+        specifier: '5'
         version: 5.105.4
     devDependencies:
       '@babel/core':
