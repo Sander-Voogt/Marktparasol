@@ -17,28 +17,24 @@ export async function GET(req: NextRequest, { params }: { params: Params }) {
 
   const cart = await retrieveCart()
 
-  if (!cart) {
-    return redirect(`${origin}/${countryCode}`)
-  }
+  // const paymentSession = cart.payment_collection?.payment_sessions?.find(
+  //   (payment) => payment.data.id === paymentIntent
+  // )
 
-  const paymentSession = cart.payment_collection?.payment_sessions?.find(
-    (payment) => payment.data.id === paymentIntent
-  )
-
-  if (
-    !paymentSession ||
-    paymentSession.data.client_secret !== paymentIntentClientSecret ||
-    !["pending", "succeeded"].includes(redirectStatus) ||
-    !["pending", "authorized"].includes(paymentSession.status)
-  ) {
-    return redirect(
-      `${origin}/checkout/return?cart_id=${cart.id}`
-    )
-  }
+  // if (
+  //   !paymentSession ||
+  //   paymentSession.data.client_secret !== paymentIntentClientSecret ||
+  //   !["pending", "succeeded"].includes(redirectStatus) ||
+  //   !["pending", "authorized"].includes(paymentSession.status)
+  // ) {
+  //   return redirect(
+  //     `${origin}/checkout/return?cart_id=${cart.id}`
+  //   )
+  // }
 
   // const order = await placeOrder(cart.id)
 
   return NextResponse.redirect(
-    `${origin}/checkout/return?cart_id=${cart.id}`
+    `${origin}/checkout/return`
   )
 }

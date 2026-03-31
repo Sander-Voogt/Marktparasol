@@ -1,3 +1,4 @@
+import { getCartId } from "@lib/data/cookies";
 import { NextResponse } from "next/server";
 
 export async function GET(
@@ -5,10 +6,8 @@ export async function GET(
   context: { params: { cartId: string } }
 ) {
   try {
-    const params = await context.params;
-    console.log("params:", params);
-    const { cartId } = params;
 
+    const cartId = getCartId()
     const url = `${process.env.NEXT_PUBLIC_MEDUSA_BACKEND_URL}/store/carts/${cartId}`;
     console.log("Fetching cart from URL:", url);
 

@@ -5,9 +5,11 @@ import { useRouter, useSearchParams } from "next/navigation"
 import { useEffect, useState } from "react"
 import { sdk } from "@lib/config"
 import { placeOrder } from "@lib/data/cart"
+import { getCartId } from "@lib/data/cookies"
 
 export default function Page({ searchParams }: { searchParams: { cart_id?: string, payment_intent?: string } }) {
-  const cartId = searchParams.cart_id
+
+  
     const router = useRouter()
 
   const paymentIntent = searchParams.payment_intent// optioneel, als je dit meestuurt
@@ -16,12 +18,7 @@ export default function Page({ searchParams }: { searchParams: { cart_id?: strin
   const [message, setMessage] = useState("We controleren je betaling... even geduld aub.")
 
   useEffect(() => {
-    if (!cartId) {
-      setStatus("failed")
-      setMessage("Fout in afhandeling betaling. Neem contact op.")
-      setTimeout(() => router.push("/nl/"), 8000)
-      return
-    }
+    
 
     let attempts = 0
     const maxAttempts = 15 // ~30 seconden
@@ -29,7 +26,7 @@ export default function Page({ searchParams }: { searchParams: { cart_id?: strin
 
     const poll = async () => {
       try {
-        const res = await fetch(`/api/cart-status/${cartId}`)
+        const res = await fetch(`/api/cart-status/`)
         const { cart } = await res.json()
 
         // Check of payment session authorized/captured is
@@ -43,7 +40,7 @@ export default function Page({ searchParams }: { searchParams: { cart_id?: strin
           
           // Optioneel: complete cart als dat nog niet gebeurd is (soms nodig bij manual capture)
           // await medusaClient.carts.complete(cartId)
-            const order = await placeOrder(cartId)
+            const order = await placeOrder()
           
           setTimeout(() => {
             router.push(`/order/${order.id}/confirmed`)
@@ -72,12 +69,12 @@ export default function Page({ searchParams }: { searchParams: { cart_id?: strin
         console.error(err)
         setStatus("failed")
         setMessage("Er ging iets mis met de betaling. Je wordt terug naar de winkelwagen gestuurd.")
-        // setTimeout(() => router.push("/checkout?error=payment_issue&step=review"), 4000)
+        setTimeout(() => router.push("/checkout?error=payment_issue&step=review"), 4000)
       }
     }
 
     poll()
-  }, [cartId, router])
+  }, [router])
 
   return (
     <div className="min-h-screen flex items-center justify-center bg-gray-50">
