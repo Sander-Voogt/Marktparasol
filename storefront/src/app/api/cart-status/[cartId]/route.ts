@@ -20,6 +20,6 @@ export async function GET(
 
     return NextResponse.json(data)
   } catch (err) {
-    return NextResponse.json({ error: "Failed to retrieve cart" }, { status: 500 })
+    return NextResponse.json({ error: "Failed to retrieve cart", err: err }, { status: 500 })
   }
 }

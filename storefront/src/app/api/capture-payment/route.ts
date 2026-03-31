@@ -32,13 +32,13 @@ export async function GET(req: NextRequest, { params }: { params: Params }) {
     !["pending", "authorized"].includes(paymentSession.status)
   ) {
     return redirect(
-      `${origin}/${countryCode}/checkout/return?cart_id=${cart.id}`
+      `${origin}/checkout/return?cart_id=${cart.id}`
     )
   }
 
   // const order = await placeOrder(cart.id)
 
   return NextResponse.redirect(
-    `${origin}/${countryCode}/checkout/return?cart_id=${cart.id}`
+    `${origin}/checkout/return?cart_id=${cart.id}`
   )
 }
