@@ -166,7 +166,7 @@ const Payment = ({
   const initStripe = async () => {
     try {
       // Initieer alleen Stripe als dat de geselecteerde methode is
-      if (selectedPaymentMethod !== "pp_system_default") {
+      if (selectedPaymentMethod !== "pp_system_default" || "pp_system_default") {
         await initiatePaymentSession(cart, {
           provider_id: "pp_stripe_stripe",
         })
