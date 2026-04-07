@@ -14,7 +14,7 @@ export default function contact() {
         <ul className="mt-10">
           <li className="text-lg font-semibold">VGT Online</li>
           <li>
-            Telefoon: <a href="tel:+31617360645">0617360645</a>
+            Telefoon: <a href="tel:+31641562160">0641562160</a>
           </li>
           <li>
             Email:{" "}

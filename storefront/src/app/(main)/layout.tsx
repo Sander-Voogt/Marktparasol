@@ -13,7 +13,7 @@ export default async function PageLayout(props: { children: React.ReactNode }) {
   return (
     <>
       <Nav />
-      <div className="bg-green-700 text-white text-center">Bel met Sander voor vragen <a href="tel:+31617360645">0617360645</a></div>
+      <div className="bg-green-700 text-white text-center">Bel met Maarten voor vragen <a href="tel:+31641562160">0641562160</a></div>
       {props.children}
       <Footer />
     </>
