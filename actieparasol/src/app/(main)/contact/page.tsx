@@ -14,11 +14,11 @@ export default function contact() {
         <ul className="mt-10">
           <li className="text-lg font-semibold">VGT Online</li>
           <li>
-            Telefoon: <a href="tel:+31617360645">0617360645</a>
+            Telefoon: <a href="tel:+31641562160">0641562160</a>
           </li>
           <li>
             Email:{" "}
-            <a href="mailto:info@markt-parasol.nl">info@markt-parasol.nl</a>
+            <a href="mailto:info@actieparasol.nl">info@actieparasol.nl</a>
           </li>
           <li>Prins der Nederlandenstraat 15</li>
           <li>3151SB Hoek van Holland</li>

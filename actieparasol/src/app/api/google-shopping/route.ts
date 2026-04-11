@@ -73,13 +73,13 @@ const getProducts = async (): Promise<Product[]> => {
                     id: product.id,
                     title: product.title,
                     description: product.description ?? "",
-                    link: "https://markt-parasol.nl/products/" + product.handle,
+                    link: "https://actieparasol.nl/products/" + product.handle,
                     image_link: product?.images?.[0]?.url ?? 'Geen afbeelding beschikbaar',
                     price: formatPrice(
                         selectedVariantPrice?.calculated_price?.calculated_amount || 0,
                         'eur'
                     ),
-                    brand: "Markt-Parasol.nl",
+                    brand: "actieparasol.nl",
                     availability: "in_stock",
                     condition: "new",
                     // gtin: "0123456789012",

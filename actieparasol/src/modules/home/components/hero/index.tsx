@@ -19,7 +19,7 @@ const Hero = () => {
         </div>
         <div className="basis-1/2 items-center">
           <img
-            src="https://markt-parasol.nl/img/marktparasols-groen-wit.jpg"
+            src="https://actieparasol.nl/img/marktparasols-groen-wit.jpg"
             alt=""
             height={600}
             width={600}

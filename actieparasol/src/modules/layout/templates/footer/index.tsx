@@ -142,8 +142,8 @@ export default async function Footer() {
               <ul className="grid grid-cols-1 gap-y-2 text-ui-fg-subtle txt-small">
                 <li>Prins der Nederlandenstraat 15</li>
                 <li>3151SB Hoek van Holland</li>
-                <li>0617360645</li>
-                <li>info@Markt-Parasol.nl</li>
+                <li>0641562160</li>
+                <li>info@actieparasol.nl</li>
                 <li>KVK: 69551731</li>
               </ul>
             </div>
