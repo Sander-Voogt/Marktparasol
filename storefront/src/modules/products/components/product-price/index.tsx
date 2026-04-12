@@ -35,6 +35,7 @@ export default function ProductPrice({
         >
           {selectedPrice.calculated_price}
         </span>
+        <span className="text-sm ml-2">ex. btw</span>
       </span>
       {selectedPrice.price_type === "sale" && (
         <>

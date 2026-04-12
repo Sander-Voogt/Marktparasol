@@ -13,7 +13,9 @@ type CartTotalsProps = {
     shipping_total?: number | null
     discount_total?: number | null
     gift_card_total?: number | null
-    currency_code: string
+    currency_code: string,
+    shipping_address: string | null,
+    billing_address: string | null
   }
 }
 
@@ -26,6 +28,8 @@ const CartTotals: React.FC<CartTotalsProps> = ({ totals }) => {
     shipping_total,
     discount_total,
     gift_card_total,
+    shipping_address,
+    billing_address
   } = totals
 
   return (
@@ -55,13 +59,17 @@ const CartTotals: React.FC<CartTotalsProps> = ({ totals }) => {
         <div className="flex items-center justify-between">
           <span>Verzendkosten</span>
           <span data-testid="cart-shipping" data-value={shipping_total || 0}>
-            {convertToLocale({ amount: shipping_total ?? 0, currency_code })}
+            {shipping_address ?
+              convertToLocale({ amount: shipping_total ?? 0, currency_code })
+              : "berekend tijdens afrekenen"}
           </span>
         </div>
         <div className="flex justify-between">
           <span className="flex gap-x-1 items-center ">BTW</span>
           <span data-testid="cart-taxes" data-value={tax_total || 0}>
-            {convertToLocale({ amount: tax_total ?? 0, currency_code })}
+            {billing_address ?
+              convertToLocale({ amount: tax_total ?? 0, currency_code })
+              : "berekend tijdens afrekenen"}
           </span>
         </div>
         {!!gift_card_total && (
