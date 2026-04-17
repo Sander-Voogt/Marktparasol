@@ -133,6 +133,10 @@ const Shipping: React.FC<ShippingProps> = ({
             data-testid="delivery-option-error-message"
           />
 
+          <div className="p-4 mb-4 text-sm text-fg-success-strong rounded-base bg-success-soft" role="alert">
+            <span className="font-medium">Transportprijs wordt achteraf berekend</span> Parasols zijn lastig te vervoeren met de post. Indien u transport wenst wordt de prijs achteraf berekend.
+          </div>
+
           <Button
             size="large"
             className="mt-6"
