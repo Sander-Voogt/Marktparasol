@@ -32,7 +32,7 @@ const Summary = ({ cart }: SummaryProps) => {
       <Heading level="h2" className="text-[2rem] leading-[2.75rem]">
         Samenvatting
       </Heading>
-      <DiscountCode cart={cart} />
+      {/* <DiscountCode cart={cart} /> */}
       <Divider />
       <CartTotals totals={cart} />
       <LocalizedClientLink
