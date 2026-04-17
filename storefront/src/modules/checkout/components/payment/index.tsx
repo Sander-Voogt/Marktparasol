@@ -163,19 +163,19 @@ const Payment = ({
     }
   }
 
-  const initStripe = async () => {
-    try {
-      // Initieer alleen Stripe als dat de geselecteerde methode is
-      if (selectedPaymentMethod !== "pp_system_default" || "pp_system_default") {
-        await initiatePaymentSession(cart, {
-          provider_id: "pp_stripe_stripe",
-        })
-      }
-    } catch (err) {
-      console.error("Failed to initialize Stripe session:", err)
-      setError("Failed to initialize payment. Please try again.")
-    }
-  }
+  // const initStripe = async () => {
+  //   try {
+  //     // Initieer alleen Stripe als dat de geselecteerde methode is
+  //     if (selectedPaymentMethod !== "pp_system_default" || "pp_system_default") {
+  //       await initiatePaymentSession(cart, {
+  //         provider_id: "pp_stripe_stripe",
+  //       })
+  //     }
+  //   } catch (err) {
+  //     console.error("Failed to initialize Stripe session:", err)
+  //     setError("Failed to initialize payment. Please try again.")
+  //   }
+  // }
 
   // Auto-selecteer betaalmethode als er maar één beschikbaar is
   useEffect(() => {
