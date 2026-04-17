@@ -51,7 +51,7 @@ const Payment = ({
   const filteredPaymentMethods = availablePaymentMethods.filter((method) => {
     if (method.id === "pp_system_default") {
       // Alleen zakelijke klanten mogen pp_system_default gebruiken
-      return isBusinessCustomer
+      return true
     }
 
     // if (method.id === "pp_stripe_stripe") {
