@@ -39,6 +39,7 @@ const Payment = ({
 
   const isOpen = searchParams.get("step") === "payment"
 
+  
   const businesscustomers = process.env.NEXT_PUBLIC_BUSINESSCUSTOMERGROUP || ""
   const businessGroupId = businesscustomers
 
