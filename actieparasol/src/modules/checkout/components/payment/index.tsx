@@ -46,6 +46,7 @@ const Payment = ({
   const isBusinessCustomer = cart?.customer?.groups?.some(
     (group: any) => group.id === businessGroupId
   )
+  console.log(availablePaymentMethods)
 
   // Filter betaalmethoden op basis van klanttype
   const filteredPaymentMethods = availablePaymentMethods.filter((method) => {

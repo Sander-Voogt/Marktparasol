@@ -47,6 +47,7 @@ const Payment = ({
     (group: any) => group.id === businessGroupId
   )
 
+  console.log(availablePaymentMethods)
   // Filter betaalmethoden op basis van klanttype
   const filteredPaymentMethods = availablePaymentMethods.filter((method) => {
     if (method.id === "pp_system_default") {
