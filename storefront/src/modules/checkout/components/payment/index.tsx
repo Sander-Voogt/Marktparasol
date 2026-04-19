@@ -128,6 +128,25 @@ const Payment = ({
         return
       }
 
+      if (selectedPaymentMethod === "pp_stripe_stripe") {
+        try {
+          // Initieer alleen Stripe als dat de geselecteerde methode is
+          await initiatePaymentSession(cart, {
+            provider_id: "pp_stripe_stripe",
+          })
+        }
+        catch (err) {
+          console.error("Failed to initialize Stripe session:", err)
+          setError("Failed to initialize payment. Please try again.")
+        }
+
+        // Ga direct naar review stap
+        router.push(pathname + "?" + createQueryString("step", "review"), {
+          scroll: false,
+        })
+        return
+      }
+
       if (selectedPaymentMethod === "pp_mollie-ideal_mollie") {
         // Initieer de payment session voor achteraf betalen
         await initiatePaymentSession(cart, {
@@ -163,19 +182,19 @@ const Payment = ({
     }
   }
 
-  // const initStripe = async () => {
-  //   try {
-  //     // Initieer alleen Stripe als dat de geselecteerde methode is
-  //     if (selectedPaymentMethod !== "pp_system_default" || "pp_system_default") {
-  //       await initiatePaymentSession(cart, {
-  //         provider_id: "pp_stripe_stripe",
-  //       })
-  //     }
-  //   } catch (err) {
-  //     console.error("Failed to initialize Stripe session:", err)
-  //     setError("Failed to initialize payment. Please try again.")
-  //   }
-  // }
+  const initStripe = async () => {
+    try {
+      // Initieer alleen Stripe als dat de geselecteerde methode is
+      if (selectedPaymentMethod !== "pp_system_default" || "pp_system_default") {
+        await initiatePaymentSession(cart, {
+          provider_id: "pp_stripe_stripe",
+        })
+      }
+    } catch (err) {
+      console.error("Failed to initialize Stripe session:", err)
+      setError("Failed to initialize payment. Please try again.")
+    }
+  }
 
   // Auto-selecteer betaalmethode als er maar één beschikbaar is
   useEffect(() => {
@@ -298,8 +317,8 @@ const Payment = ({
                       ))}
                   </RadioGroup>
                 </div>
-              ): (
-                 <div className="mb-5">
+              ) : (
+                <div className="mb-5">
                   <RadioGroup
                     value={selectedPaymentMethod}
                     onChange={handlePaymentMethodChange}
