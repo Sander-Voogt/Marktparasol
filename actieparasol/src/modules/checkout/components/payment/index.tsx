@@ -39,7 +39,6 @@ const Payment = ({
 
   const isOpen = searchParams.get("step") === "payment"
 
-  
   const businesscustomers = process.env.NEXT_PUBLIC_BUSINESSCUSTOMERGROUP || ""
   const businessGroupId = businesscustomers
 
@@ -47,8 +46,8 @@ const Payment = ({
   const isBusinessCustomer = cart?.customer?.groups?.some(
     (group: any) => group.id === businessGroupId
   )
-  console.log(availablePaymentMethods)
 
+  console.log(availablePaymentMethods)
   // Filter betaalmethoden op basis van klanttype
   const filteredPaymentMethods = availablePaymentMethods.filter((method) => {
     if (method.id === "pp_system_default") {
@@ -206,18 +205,18 @@ const Payment = ({
     }
   }, [filteredPaymentMethods, selectedPaymentMethod])
 
-  // useEffect(() => {
-  //   // console.log('dddd', activeSession['provider_id'] !== "pp_stripe_stripe", isStripeFunc(activeSession?.provider_id),
-  //   //   isOpen,
-  //   //   selectedPaymentMethod )
-  //   if (
-  //     !isStripeFunc(activeSession?.provider_id) &&
-  //     isOpen &&
-  //     selectedPaymentMethod !== "pp_system_default"
-  //   ) {
-  //     initStripe()
-  //   }
-  // }, [cart, isOpen, activeSession, selectedPaymentMethod])
+  useEffect(() => {
+    // console.log('dddd', activeSession['provider_id'] !== "pp_stripe_stripe", isStripeFunc(activeSession?.provider_id),
+    //   isOpen,
+    //   selectedPaymentMethod )
+    if (
+      !isStripeFunc(activeSession?.provider_id) &&
+      isOpen &&
+      selectedPaymentMethod !== "pp_system_default"
+    ) {
+      initStripe()
+    }
+  }, [cart, isOpen, activeSession, selectedPaymentMethod])
 
   useEffect(() => {
     setError(null)
@@ -240,6 +239,11 @@ const Payment = ({
     selectedPaymentMethod !== "pp_mollie-ideal_mollie" &&
     selectedPaymentMethod !== "" &&
     stripeReady
+
+  console.log('stripe', showStripePaymentElement, selectedPaymentMethod !== "pp_system_default" ,
+    selectedPaymentMethod !== "pp_mollie-ideal_mollie" ,
+    selectedPaymentMethod !== "" ,
+    stripeReady)
 
   console.log(availablePaymentMethods)
 

@@ -205,18 +205,18 @@ const Payment = ({
     }
   }, [filteredPaymentMethods, selectedPaymentMethod])
 
-  // useEffect(() => {
-  //   // console.log('dddd', activeSession['provider_id'] !== "pp_stripe_stripe", isStripeFunc(activeSession?.provider_id),
-  //   //   isOpen,
-  //   //   selectedPaymentMethod )
-  //   if (
-  //     !isStripeFunc(activeSession?.provider_id) &&
-  //     isOpen &&
-  //     selectedPaymentMethod !== "pp_system_default"
-  //   ) {
-  //     initStripe()
-  //   }
-  // }, [cart, isOpen, activeSession, selectedPaymentMethod])
+  useEffect(() => {
+    // console.log('dddd', activeSession['provider_id'] !== "pp_stripe_stripe", isStripeFunc(activeSession?.provider_id),
+    //   isOpen,
+    //   selectedPaymentMethod )
+    if (
+      !isStripeFunc(activeSession?.provider_id) &&
+      isOpen &&
+      selectedPaymentMethod !== "pp_system_default"
+    ) {
+      initStripe()
+    }
+  }, [cart, isOpen, activeSession, selectedPaymentMethod])
 
   useEffect(() => {
     setError(null)
@@ -239,6 +239,11 @@ const Payment = ({
     selectedPaymentMethod !== "pp_mollie-ideal_mollie" &&
     selectedPaymentMethod !== "" &&
     stripeReady
+
+  console.log('stripe', showStripePaymentElement, selectedPaymentMethod !== "pp_system_default" ,
+    selectedPaymentMethod !== "pp_mollie-ideal_mollie" ,
+    selectedPaymentMethod !== "" ,
+    stripeReady)
 
   console.log(availablePaymentMethods)
 
