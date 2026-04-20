@@ -8,6 +8,8 @@ interface Hits {
   [x: string | number | symbol]: unknown
 }
 
+const MEDUSA_STORE_SALES_CHANNEL_ID = 'sc_01K5RS8ARYVAAAMA4BFMBMZH0T'
+
 /**
  * Uses MeiliSearch or Algolia to search for a query
  * @param {string} query - search query
@@ -15,7 +17,12 @@ interface Hits {
 export async function search(query: string) {
   // MeiliSearch
   const queries = [{ params: { query }, indexName: SEARCH_INDEX_NAME }]
-  const { results } = (await searchClient.search(queries)) as Record<
+  const { results } = (await searchClient.search(queries,{
+  filter: [
+    `sales_channels.id = "${STORE_SALES_CHANNEL_ID}"`,
+    `status = published`
+  ]
+})) as Record<
     string,
     any
   >
