@@ -7,7 +7,10 @@ export default async function FeaturedProducts({
 }: {
   collections: HttpTypes.StoreCollection[]
   region: HttpTypes.StoreRegion
+
+  
 }) {
+  console.log(collections)
   return collections.map((collection) => (
     <li key={collection.id}>
       <ProductRail collection={collection} region={region} />

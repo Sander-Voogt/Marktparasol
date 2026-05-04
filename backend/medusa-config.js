@@ -58,175 +58,176 @@ const medusaConfig = {
         providers: [
           ...(MINIO_ENDPOINT && MINIO_ACCESS_KEY && MINIO_SECRET_KEY
             ? [
-                {
-                  resolve: "./src/modules/minio-file",
-                  id: "minio",
-                  options: {
-                    endPoint: MINIO_ENDPOINT,
-                    accessKey: MINIO_ACCESS_KEY,
-                    secretKey: MINIO_SECRET_KEY,
-                    bucket: MINIO_BUCKET, // Optional, default: medusa-media
-                  },
+              {
+                resolve: "./src/modules/minio-file",
+                id: "minio",
+                options: {
+                  endPoint: MINIO_ENDPOINT,
+                  accessKey: MINIO_ACCESS_KEY,
+                  secretKey: MINIO_SECRET_KEY,
+                  bucket: MINIO_BUCKET, // Optional, default: medusa-media
                 },
-              ]
+              },
+            ]
             : [
-                {
-                  resolve: "@medusajs/file-local",
-                  id: "local",
-                  options: {
-                    upload_dir: "static",
-                    backend_url: `${BACKEND_URL}/static`,
-                  },
+              {
+                resolve: "@medusajs/file-local",
+                id: "local",
+                options: {
+                  upload_dir: "static",
+                  backend_url: `${BACKEND_URL}/static`,
                 },
-              ]),
+              },
+            ]),
         ],
       },
     },
     ...(REDIS_URL
       ? [
-          {
-            key: Modules.EVENT_BUS,
-            resolve: "@medusajs/event-bus-redis",
-            options: {
-              redisUrl: REDIS_URL,
+        {
+          key: Modules.EVENT_BUS,
+          resolve: "@medusajs/event-bus-redis",
+          options: {
+            redisUrl: REDIS_URL,
+          },
+        },
+        {
+          key: Modules.WORKFLOW_ENGINE,
+          resolve: "@medusajs/workflow-engine-redis",
+          options: {
+            redis: {
+              url: REDIS_URL,
             },
           },
-          {
-            key: Modules.WORKFLOW_ENGINE,
-            resolve: "@medusajs/workflow-engine-redis",
-            options: {
-              redis: {
-                url: REDIS_URL,
-              },
-            },
-          },
-        ]
+        },
+      ]
       : []),
     ...((SENDGRID_API_KEY && SENDGRID_FROM_EMAIL) ||
-    (RESEND_API_KEY && RESEND_FROM_EMAIL)
+      (RESEND_API_KEY && RESEND_FROM_EMAIL)
       ? [
-          {
-            key: Modules.NOTIFICATION,
-            resolve: "@medusajs/notification",
-            options: {
-              providers: [
-                ...(SENDGRID_API_KEY && SENDGRID_FROM_EMAIL
-                  ? [
-                      {
-                        resolve: "@medusajs/notification-sendgrid",
-                        id: "sendgrid",
-                        options: {
-                          channels: ["email"],
-                          api_key: SENDGRID_API_KEY,
-                          from: SENDGRID_FROM_EMAIL,
-                        },
-                      },
-                    ]
-                  : []),
-                ...(RESEND_API_KEY && RESEND_FROM_EMAIL
-                  ? [
-                      {
-                        resolve: "./src/modules/email-notifications",
-                        id: "resend",
-                        options: {
-                          channels: ["email"],
-                          api_key: RESEND_API_KEY,
-                          from: RESEND_FROM_EMAIL,
-                        },
-                      },
-                    ]
-                  : []),
-              ],
-            },
+        {
+          key: Modules.NOTIFICATION,
+          resolve: "@medusajs/notification",
+          options: {
+            providers: [
+              ...(SENDGRID_API_KEY && SENDGRID_FROM_EMAIL
+                ? [
+                  {
+                    resolve: "@medusajs/notification-sendgrid",
+                    id: "sendgrid",
+                    options: {
+                      channels: ["email"],
+                      api_key: SENDGRID_API_KEY,
+                      from: SENDGRID_FROM_EMAIL,
+                    },
+                  },
+                ]
+                : []),
+              ...(RESEND_API_KEY && RESEND_FROM_EMAIL
+                ? [
+                  {
+                    resolve: "./src/modules/email-notifications",
+                    id: "resend",
+                    options: {
+                      channels: ["email"],
+                      api_key: RESEND_API_KEY,
+                      from: RESEND_FROM_EMAIL,
+                    },
+                  },
+                ]
+                : []),
+            ],
           },
-        ]
+        },
+      ]
       : []),
     ...(STRIPE_API_KEY && STRIPE_WEBHOOK_SECRET
       ? [
-          {
-            key: Modules.PAYMENT,
-            resolve: "@medusajs/payment",
-            options: {
-              providers: [
-                {
-                  resolve: "@medusajs/payment-stripe",
-                  id: "stripe",
-                  options: {
-                    apiKey: process.env.STRIPE_API_KEY,
-                    webhookSecret: process.env.STRIPE_WEBHOOK_SECRET,
-                    capture: true
-                  },
+        {
+          key: Modules.PAYMENT,
+          resolve: "@medusajs/payment",
+          options: {
+            providers: [
+              {
+                resolve: "@medusajs/payment-stripe",
+                id: "stripe",
+                options: {
+                  apiKey: process.env.STRIPE_API_KEY,
+                  webhookSecret: process.env.STRIPE_WEBHOOK_SECRET,
+                  capture: true
                 },
-                {
-                  resolve:
-                    "@variablevic/mollie-payments-medusa/providers/mollie",
-                  id: "mollie",
-                  options: {
-                    apiKey: process.env.MOLLIE_API_KEY,
-                    redirectUrl: process.env.MOLLIE_REDIRECT_URL,
-                    medusaUrl: process.env.MEDUSA_URL,
-                    debug: process.env.MOLLIE_DEBUG === "true",
-                  },
+              },
+              {
+                resolve:
+                  "@variablevic/mollie-payments-medusa/providers/mollie",
+                id: "mollie",
+                options: {
+                  apiKey: process.env.MOLLIE_API_KEY,
+                  redirectUrl: process.env.MOLLIE_REDIRECT_URL,
+                  medusaUrl: process.env.MEDUSA_URL,
+                  debug: process.env.MOLLIE_DEBUG === "true",
                 },
-              ],
-            },
+              },
+            ],
           },
-        ]
+        },
+      ]
       : []),
   ],
   plugins: [
     ...(MEILISEARCH_HOST && MEILISEARCH_ADMIN_KEY
       ? [
-          {
-  resolve: "@rokmohar/medusa-plugin-meilisearch",
-  options: {
-    config: {
-      host: MEILISEARCH_HOST,
-      apiKey: MEILISEARCH_ADMIN_KEY,
-    },
-    settings: {
-      products: {
-        type: "products",
-        enabled: true,
-        fields: [
-          "id",
-          "title",
-          "description",
-          "handle",
-          "variant_sku",
-          "thumbnail",
-          "sales_channels.id", // 🔥 BELANGRIJK
-          "status",            // ook handig
-        ],
-        indexSettings: {
-          searchableAttributes: [
-            "title",
-            "description",
-            "variant_sku",
-          ],
-          displayedAttributes: [
-            "id",
-            "handle",
-            "title",
-            "description",
-            "variant_sku",
-            "thumbnail",
-            "sales_channels",
-            "status",
-          ],
-          filterableAttributes: [
-            "id",
-            "handle",
-            "sales_channels.id", // 🔥 essentieel
-            "status",
-          ],
-        },
-        primaryKey: "id",
-      },
-    },
-  },
-}
-        ]
+        {
+          resolve: "@rokmohar/medusa-plugin-meilisearch",
+          options: {
+            config: {
+              host: MEILISEARCH_HOST,
+              apiKey: MEILISEARCH_ADMIN_KEY,
+            },
+            settings: {
+              products: {
+                type: "products",
+                enabled: true,
+                fields: [
+                  "id",
+                  "title",
+                  "description",
+                  "handle",
+                  "variant_sku",
+                  "thumbnail",
+                  "sales_channels.id", // 🔥 BELANGRIJK
+                  "status",            // ook handig
+                ],
+                indexSettings: {
+                  searchableAttributes: [
+                    "title",
+                    "description",
+                    "variant_sku",
+                  ],
+                  displayedAttributes: [
+                    "id",
+                    "handle",
+                    "title",
+                    "description",
+                    "variant_sku",
+                    "thumbnail",
+                    "sales_channels",
+                    "sales_channels.id", // 🔥 toevoegen
+                    "status",
+                  ],
+                  filterableAttributes: [
+                    "id",
+                    "handle",
+                    "sales_channels.id", // 🔥 essentieel
+                    "status",
+                  ],
+                },
+                primaryKey: "id",
+              },
+            },
+          },
+        }
+      ]
       : []),
   ],
 };
